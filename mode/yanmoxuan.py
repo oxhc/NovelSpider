@@ -16,12 +16,12 @@ def download_chapter(url):
     bs = get_bs(url, 'gbk')
     next_u = next_url(bs)
     title = get_title(bs)
-    body = body_detect(bs)
+    body = get_body(bs)
     chapter = convert(url, title, body)
     while next_u is not None:
         next_bs = get_bs(next_u, 'gbk')
         next_u = next_url(next_bs)
-        body = body_detect(next_bs)
+        body = get_body(next_bs)
         chapter.content = chapter.content + '\n' + body
     return chapter
 
@@ -36,7 +36,7 @@ def get_title(bs: BeautifulSoup):
     return bs.title.string.split("_")[0]
 
 
-def body_detect(bs: BeautifulSoup):
+def get_body(bs: BeautifulSoup):
     cont = bs.select_one("div.cont")
     cont.select_one("div.chapter_turnpage").clear()
     cont.select_one("div.nfx").clear()

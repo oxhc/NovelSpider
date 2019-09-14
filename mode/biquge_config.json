@@ -1,0 +1,9 @@
+{
+  "book_name": "#info > h1",
+  "chapter_urls": "#list > dl > dd > a",
+  "chapter_url_prefix": "https://www.biquge.com.cn",
+  "chapter_name": "#wrapper > div.content_read > div > div.bookname > h1",
+  "body": "#content",
+  "inter_lines": "\n",
+  "has_more_pages": "False"
+}

@@ -4,13 +4,15 @@ import re
 class HcUrl:
     def __init__(self, url: str):
         self.url = url
-        self.parts = {}
+        self.__parts = {}
 
     def get_end(self):
-        pass
+        t_url = re.sub("\/$|.html?", '', self.url)
+        result = t_url.split('/')
+        return result[len(result)-1]
 
     def get(self, key: str):
-        return self.parts[key]
+        return self.__parts[key]
 
     def parse(self):
         re_patern = "(http.?):\/\/"
@@ -18,14 +20,16 @@ class HcUrl:
         protocol = 'https'
         if m and m.group(1):
             protocol = m.group(1)
-        self.parts['protocol'] = protocol
+        self.__parts['protocol'] = protocol
         se_url = re.sub("(http.?):\/\/", '', self.url)
-        self.parts['domain'] = se_url.split('/')[0]
+        self.__parts['domain'] = se_url.split('/')[0]
+        return self
 
 
 if __name__ == '__main__':
-    url = HcUrl("https://www.biquge.com.cn/book/31833/")
+    url = HcUrl("https://www.biquge.com.cn/book/31833.html").parse()
     # print(url.get_first())
-    url.parse()
+
     print(url.get('protocol'))
     print(url.get('domain'))
+    print(url.get_end())
