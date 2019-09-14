@@ -5,14 +5,11 @@ from concurrent.futures import as_completed
 from bs4 import BeautifulSoup
 import re
 from entity.dcr import Chapter
-import queue
 
 from utils import safe_mkdir, get_bs
 
-url_queue = queue.Queue()
-result_queue = queue.Queue()
 temp_novel = 'novel_temp/'
-catalog_url = "https://www.daocaorenshuwu.com/book/shishangzuiqiangzhuixu/"
+catalog_url = "https://www.daocaorenshuwu.com/book/zhuixu/"
 count = 0
 isConfused = True
 
@@ -61,7 +58,7 @@ def body_detect(bs: BeautifulSoup):
             print(get_title(bs) + '############### wrong')
             isConfused = False
             pass
-    body = '\n'.join([i for i in cont.stripped_strings][:-2])
+    body = '\n    '.join([i for i in cont.stripped_strings][:-2])
     body = re.sub("\n\n+", '', body)
     return body
 
@@ -82,11 +79,20 @@ def my_thread(url):
     return obj
 
 
-def main():
+def main(cl, max_workers=10):
+    """
+    主函数
+    :param cl:  catalog_url
+    :param max_workers: 最大线程数量
+    :return:  None
+    """
+
     global temp_novel
     global catalog_url
-    download_count = 15
-    executor = ThreadPoolExecutor(max_workers=10)
+
+    catalog_url = cl
+    download_count = 0
+    executor = ThreadPoolExecutor(max_workers=max_workers)
     c_bs = get_bs(catalog_url)
     links = get_chapters_url(c_bs)
     if download_count != 0:
@@ -95,7 +101,6 @@ def main():
     book_name = cuts[len(cuts) - 2]
     safe_mkdir(temp_novel + book_name)
     temp_novel = temp_novel + book_name
-    url_queue.queue = queue.deque(links)
 
     all_task = [executor.submit(my_thread, (url)) for url in links]
 
@@ -106,5 +111,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main("https://www.daocaorenshuwu.com/book/zhuixu/")
     pass

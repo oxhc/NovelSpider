@@ -3,10 +3,7 @@ from functools import cmp_to_key
 import queue
 import os
 
-file_path = 'novel/'
-files_queue = queue.Queue()
-ready_write = []
-
+from utils import safe_mkdir
 
 def filename_cmp(x: str, y: str):
     x_num = int(x.split('_')[0])
@@ -15,9 +12,12 @@ def filename_cmp(x: str, y: str):
 
 
 def main():
+    safe_mkdir("novel/")
+    book_name = 'zhuixu'
+    file_path = 'novel_temp/' + book_name +'/'
     fies = os.listdir(file_path)
     fies.sort(key=cmp_to_key(filename_cmp))
-    with open("novel.txt", "a", encoding='utf8') as novel:
+    with open("novel/"+book_name+".txt", "a", encoding='utf8') as novel:
         for f in fies:
             with open(file_path + f, 'r', encoding='utf8') as temp:
                 novel.write(temp.read() + '\n')
