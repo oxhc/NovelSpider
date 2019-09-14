@@ -5,35 +5,25 @@ from concurrent.futures import as_completed
 from bs4 import BeautifulSoup
 import re
 from entity.ymx import YmxNovel
-import queue
+from mode import common_var
 
-from utils import get_bs
+from utils import get_bs, safe_mkdir, save
 
-start_url = "https://www.yanmoxuan.org/txt181_89985.html"
-
-url_queue = queue.Queue()
-result_queue = queue.Queue()
 count = 0
 
 
 def download_chapter(url):
-    bs = get_bs(url)
+    bs = get_bs(url, 'gbk')
     next_u = next_url(bs)
     title = get_title(bs)
     body = body_detect(bs)
     chapter = convert(url, title, body)
     while next_u is not None:
-        next_bs = get_bs(next_u)
+        next_bs = get_bs(next_u, 'gbk')
         next_u = next_url(next_bs)
         body = body_detect(next_bs)
         chapter.content = chapter.content + '\n' + body
-
     return chapter
-
-
-def save(text):
-    with open('novel.txt', 'a', encoding='utf8') as file:
-        file.write(text)
 
 
 def get_chapters_url(bs: BeautifulSoup):
@@ -50,7 +40,7 @@ def body_detect(bs: BeautifulSoup):
     cont = bs.select_one("div.cont")
     cont.select_one("div.chapter_turnpage").clear()
     cont.select_one("div.nfx").clear()
-    body = '\n'.join([i for i in cont.stripped_strings][:-2])
+    body = '\n      '.join([i for i in cont.stripped_strings][:-2])
     body = re.sub("---.+", '', body)
     body = re.sub("衍.+轩", '', body)
     body = re.sub("\n\n+", '', body)
@@ -67,6 +57,7 @@ def convert(url, title, body):
 
 
 def next_url(bs: BeautifulSoup):
+    start_url = "https://www.yanmoxuan.org/txt181_89985.html"
     links = bs.select("div.chapter_turnpage a")
     href: str = links[2]['href']
     result = re.match(".+\/", start_url).group() + href[1:]
@@ -76,23 +67,22 @@ def next_url(bs: BeautifulSoup):
 def my_thread(url):
     global count
     obj = download_chapter(url)
+    save(common_var.temp_dir, obj.chapter_id + '_' + obj.chapter_name, '# ' + obj.chapter_name + '\n\n' + obj.content)
     count += 1
     print('已下载 ' + str(count) + ' 章')
     return obj
 
 
-def main():
-    catalog_url = "https://www.yanmoxuan.org/txt181/"
-    executor = ThreadPoolExecutor(max_workers=10)
-    links = get_chapters_url(get_bs(catalog_url))
-    # links = links[:10]
-    # url_queue.queue = queue.deque(links)
-
+def main(cl, maxw=10):
+    temp_novel = common_var.temp_dir + cl[-5:].replace('/', '') + '/'
+    safe_mkdir(temp_novel)
+    catalog_url = cl
+    executor = ThreadPoolExecutor(max_workers=maxw)
+    links = get_chapters_url(get_bs(catalog_url, 'gbk'))
     all_task = [executor.submit(my_thread, (url)) for url in links]
 
     for future in as_completed(all_task):
-        data = future.result()
-        result_queue.put(data)
+        future.result()
 
     print("下载完毕")
 

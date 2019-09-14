@@ -6,10 +6,10 @@ from bs4 import BeautifulSoup
 import re
 from entity.dcr import Chapter
 
-from utils import safe_mkdir, get_bs
+from utils import safe_mkdir, get_bs, save
+from . import common_var
 
-temp_novel = 'novel_temp/'
-catalog_url = "https://www.daocaorenshuwu.com/book/zhuixu/"
+catalog_url = ""
 count = 0
 isConfused = True
 
@@ -24,13 +24,7 @@ def download_chapter(url):
     for url in other_urls:
         other_bs = get_bs(catalog_url + url)
         chapter.content += body_detect(other_bs)
-        print("第二节")
     return chapter
-
-
-def save(dir, name, text):
-    with open(dir + '/' + name + '.txt', 'w+', encoding='utf8') as file:
-        file.write(text)
 
 
 def get_chapters_url(bs: BeautifulSoup):
@@ -58,7 +52,7 @@ def body_detect(bs: BeautifulSoup):
             print(get_title(bs) + '############### wrong')
             isConfused = False
             pass
-    body = '\n    '.join([i for i in cont.stripped_strings][:-2])
+    body = '\n      '.join([i for i in cont.stripped_strings][:-2])
     body = re.sub("\n\n+", '', body)
     return body
 
@@ -73,7 +67,7 @@ def convert(url, title, body):
 def my_thread(url):
     global count
     obj = download_chapter(url)
-    save(temp_novel, obj.chapter_id + '_' + obj.chapter_name, '# ' + obj.chapter_name + '\n\n' + obj.content)
+    save(common_var.temp_dir, obj.chapter_id + '_' + obj.chapter_name, '# ' + obj.chapter_name + '\n\n' + obj.content)
     count += 1
     print('已下载 ' + str(count) + ' 章')
     return obj
@@ -86,8 +80,6 @@ def main(cl, max_workers=10):
     :param max_workers: 最大线程数量
     :return:  None
     """
-
-    global temp_novel
     global catalog_url
 
     catalog_url = cl
@@ -99,8 +91,8 @@ def main(cl, max_workers=10):
         links = links[:download_count]
     cuts = catalog_url.split('/')
     book_name = cuts[len(cuts) - 2]
-    safe_mkdir(temp_novel + book_name)
-    temp_novel = temp_novel + book_name
+    safe_mkdir(common_var.temp_dir + book_name)
+    common_var.temp_dir = common_var.temp_dir + book_name
 
     all_task = [executor.submit(my_thread, (url)) for url in links]
 

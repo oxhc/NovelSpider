@@ -11,9 +11,8 @@ def filename_cmp(x: str, y: str):
     return x_num - y_num
 
 
-def main():
+def main(book_name):
     safe_mkdir("novel/")
-    book_name = 'zhuixu'
     file_path = 'novel_temp/' + book_name +'/'
     fies = os.listdir(file_path)
     fies.sort(key=cmp_to_key(filename_cmp))
@@ -25,5 +24,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main("zhuixu")
     pass
