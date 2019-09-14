@@ -1,6 +1,5 @@
 # coding=utf8
 from functools import cmp_to_key
-import queue
 import os
 
 from utils import safe_mkdir
@@ -24,5 +23,5 @@ def main(book_name):
 
 
 if __name__ == '__main__':
-    main("zhuixu")
+    main(input())
     pass

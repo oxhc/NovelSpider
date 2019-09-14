@@ -14,6 +14,6 @@ def main(url, maxworker=10):
 
 
 if __name__ == '__main__':
-    main("https://www.daocaorenshuwu.com/book/zhuixu/")
-    # fire.Fire(main)
+    # main("https://www.daocaorenshuwu.com/book/4564/")
+    fire.Fire(main)
     # common_var.test()
