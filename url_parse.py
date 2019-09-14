@@ -24,7 +24,7 @@ class HcUrl:
 
 
 if __name__ == '__main__':
-    url = HcUrl("www.daocaorenshuwu.com/book/zhuixu/")
+    url = HcUrl("https://www.biquge.com.cn/book/31833/")
     # print(url.get_first())
     url.parse()
     print(url.get('protocol'))
