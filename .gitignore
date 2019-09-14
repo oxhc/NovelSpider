@@ -1,0 +1,5 @@
+/novel
+/novel_temp
+*.txt
+.idea
+*.py[cod]
