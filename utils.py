@@ -20,7 +20,7 @@ def get_bs(url, encoding='utf8'):
                "Accept-Language": "en-us",
                "Connection": "keep-alive",
                "Accept-Charset": "GB2312,utf-8;q=0.7,*;q=0.7"}
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, timeout=10)
     response.encoding = encoding
     return BeautifulSoup(response.text, "html5lib")
 
