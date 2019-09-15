@@ -4,6 +4,9 @@ import os
 
 from utils import safe_mkdir
 
+project_path = os.path.dirname(__file__)
+
+
 def filename_cmp(x: str, y: str):
     x_num = int(x.split('_')[0])
     y_num = int(y.split('_')[0])
@@ -11,17 +14,17 @@ def filename_cmp(x: str, y: str):
 
 
 def main(book_name):
-    safe_mkdir("novel/")
-    file_path = 'novel_temp/' + book_name +'/'
+    safe_mkdir(os.path.join(project_path, 'novel'))
+    file_path = os.path.join(project_path, 'novel_temp', book_name)
     fies = os.listdir(file_path)
     fies.sort(key=cmp_to_key(filename_cmp))
-    with open("novel/"+book_name+".txt", "a", encoding='utf8') as novel:
+    with open(os.path.join(project_path, 'novel', book_name+'.txt'), "a", encoding='utf8') as novel:
         for f in fies:
-            with open(file_path + f, 'r', encoding='utf8') as temp:
+            with open(os.path.join(file_path, f), 'r', encoding='utf8') as temp:
                 novel.write(temp.read() + '\n')
     pass
 
 
 if __name__ == '__main__':
-    main(input())
+    main("赘婿-www.88dush.com")
     pass

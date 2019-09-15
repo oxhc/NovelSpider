@@ -1,5 +1,5 @@
 {
-  "book_name": "#info > h1",
+  "book_name": "#info > div > h1",
   "书名位置": "book_name",
 
   "chapter_urls": "#list > dl > dd > a",
@@ -14,7 +14,7 @@
   "inter_lines": "\n",
   "正文每行间的填充": "inter_lines",
 
-  "has_more_pages": "False",
+  "has_more_pages": "True",
   "章节是否分页": "has_more_pages",
 
   "chapter_url_prefix": "absolute",

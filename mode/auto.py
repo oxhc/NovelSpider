@@ -19,14 +19,25 @@ save_path = None
 
 
 def download_chapter(url):
-    bs = get_bs(url)
+    """
+    下载章节
+    :param url: 章节url
+    :return: 章节对象
+    """
+    bs = get_bs(url, config['encoding'])
     title = get_chapter_name(bs)
     body = get_body(bs)
     chapter = convert(url, title, body)
     return chapter
 
 
-def parse_catalog(bs: BeautifulSoup, prefix='https://www.biquge.com.cn'):
+def parse_catalog(bs: BeautifulSoup, prefix=''):
+    """
+    解析目录页信息
+    :param bs: 文档树
+    :param prefix: 目录前缀
+    :return: 书名, 章节链接
+    """
     atags = bs.select(config['chapter_urls'])
     links = [prefix + a['href'] for a in atags if 'class' not in a.attrs]
     book_name = bs.select_one(config['book_name']).string
@@ -34,10 +45,16 @@ def parse_catalog(bs: BeautifulSoup, prefix='https://www.biquge.com.cn'):
 
 
 def get_chapter_name(bs: BeautifulSoup):
+    """
+    获取章节名
+    :param bs: 文档树
+    :return: 章节名
+    """
     return bs.select_one(config['chapter_name']).string
 
 
 def get_body(bs: BeautifulSoup):
+    # todo: 还没写分页模式
     cont = bs.select_one(config['body'])
     body = config['inter_lines'].join([i for i in cont.stripped_strings])
     return body
@@ -97,9 +114,19 @@ def main(config_name, catalog_url, max_workers=10, undone=False, download=(0, 0)
     executor = ThreadPoolExecutor(max_workers=max_workers)
 
     # 获取书名与章节链接
-    catalog_bs = get_bs(catalog_url)
-    book_name, links = parse_catalog(catalog_bs, hc_url.get('protocol') + '://' + hc_url.get('domain'))
+    catalog_bs = get_bs(catalog_url, config['encoding'])
+
+    prefix = hc_url.get('protocol') + '://' + hc_url.get('domain')
+
+    if config['chapter_url_prefix'] == 'relative':
+        prefix = catalog_url
+    elif config['chapter_url_prefix'] == 'without_protocol':
+        prefix = hc_url.get('protocol')+':'
+
+    book_name, links = parse_catalog(catalog_bs, prefix)
     print('Get catalog page success')
+
+    print(links)
 
     # 加载未下载成功链接
     if undone is True:
@@ -110,7 +137,7 @@ def main(config_name, catalog_url, max_workers=10, undone=False, download=(0, 0)
         links = links[download[0]:download[1]]
 
     # 配置下载路径
-    save_path = os.path.join(project_path, 'novel_temp', book_name)
+    save_path = os.path.join(project_path, 'novel_temp', book_name+'-'+hc_url.get('domain'))
     safe_mkdir(save_path)
 
     #将任务提交至线程池
@@ -140,15 +167,17 @@ def main(config_name, catalog_url, max_workers=10, undone=False, download=(0, 0)
 
 
 if __name__ == '__main__':
-    url = "https://www.biquge.com.cn/book/31833/"
-    res = main("biquge", url, max_workers=20, undone=False)
-    flag = 0
-    left = res
-    while res != 0 and flag < 4:
+    mode_name = "daocaorenshuwu"
+    url = "https://www.daocaorenshuwu.com/book/mingtianxia/"
+    failed = main(mode_name, url, max_workers=20, undone=False)
+    max_failed = 0
+    left = failed
+    while failed != 0 and max_failed < 4:
         count = 0
-        res = main("biquge", url, max_workers=20, undone=True)
-        if left == res:
-            flag += 1
+        print("\n 尝试重新下载失败章节")
+        failed = main(mode_name, url, max_workers=20, undone=True)
+        if left == failed:
+            max_failed += 1
         else:
-            left = res
+            left = failed
     pass
