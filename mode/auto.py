@@ -1,5 +1,6 @@
 # coding=gbk
 import json
+import os
 from concurrent.futures.thread import ThreadPoolExecutor
 from concurrent.futures import as_completed
 
@@ -7,13 +8,14 @@ from bs4 import BeautifulSoup
 from tqdm import tqdm
 
 from entity.dcr import Chapter
-from mode import common_var
 from url_parse import HcUrl
 
 from utils import safe_mkdir, get_bs, save
 
 count = 0
 config = None
+project_path = os.path.dirname(os.path.dirname(__file__))
+save_path = None
 
 
 def download_chapter(url):
@@ -51,7 +53,7 @@ def my_thread(url):
     try:
         chapter = download_chapter(url)
         save(
-            common_var.temp_dir,
+            save_path,
             chapter.chapter_id + '_' + chapter.chapter_name,
             '# ' + chapter.chapter_name + '\n\n' + chapter.content
         )
@@ -72,34 +74,46 @@ def get_undone_urls():
 def main(config_name, catalog_url, max_workers=10, undone=False, download=(0, 0)):
     """
     主函数
+    :param undone: 是否下载未下载成功的章节
+    :param download: 下载数目
     :param config_name: 配置名称
     :param catalog_url:  目录所在路径
     :param max_workers: 最大线程数量
     :return:  None
     """
 
-    # 解析配置文件
+    #加载全局变量
+    global save_path
     global config
-    with open(config_name + '_config.json', 'r', encoding='utf8') as config_file:
+
+    # 解析配置文件
+    with open(os.path.join(project_path, 'configs', config_name + '_config.json'), 'r', encoding='utf8') as config_file:
         config = json.loads(config_file.read())
 
+    #解析url
     hc_url = HcUrl(catalog_url).parse()
 
+    # 加载线程池
     executor = ThreadPoolExecutor(max_workers=max_workers)
+
+    # 获取书名与章节链接
     catalog_bs = get_bs(catalog_url)
     book_name, links = parse_catalog(catalog_bs, hc_url.get('protocol') + '://' + hc_url.get('domain'))
     print('Get catalog page success')
 
+    # 加载未下载成功链接
     if undone is True:
         links = get_undone_urls()
 
-    # 下载数量
+    # 下载数量设置
     if download != (0, 0):
         links = links[download[0]:download[1]]
 
-    common_var.temp_dir = common_var.temp_dir + book_name
-    safe_mkdir(common_var.temp_dir)
+    # 配置下载路径
+    save_path = os.path.join(project_path, 'novel_temp', book_name)
+    safe_mkdir(save_path)
 
+    #将任务提交至线程池
     all_task = [executor.submit(my_thread, url) for url in links]
     faild_list = []
 
@@ -126,7 +140,7 @@ def main(config_name, catalog_url, max_workers=10, undone=False, download=(0, 0)
 
 
 if __name__ == '__main__':
-    url = "https://www.xbiquge6.com/88_88228/"
+    url = "https://www.biquge.com.cn/book/31833/"
     res = main("biquge", url, max_workers=20, undone=False)
     flag = 0
     left = res
