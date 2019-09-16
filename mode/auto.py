@@ -11,6 +11,7 @@ from entity.dcr import Chapter
 from url_parse import HcUrl
 
 from utils import safe_mkdir, get_bs, save
+import files_merge
 
 count = 0
 config = None
@@ -126,11 +127,13 @@ def main(config_name, catalog_url, max_workers=10, undone=False, download=(0, 0)
     book_name, links = parse_catalog(catalog_bs, prefix)
     print('Get catalog page success')
 
-    print(links)
+
 
     # 加载未下载成功链接
     if undone is True:
         links = get_undone_urls()
+
+    print(links)
 
     # 下载数量设置
     if download != (0, 0):
@@ -163,21 +166,23 @@ def main(config_name, catalog_url, max_workers=10, undone=False, download=(0, 0)
     else:
         print('全部下载完毕')
 
-    return len(faild_list)
+    book_name += '-' + hc_url.get('domain')
+    return len(faild_list), book_name
 
 
 if __name__ == '__main__':
-    mode_name = "daocaorenshuwu"
-    url = "https://www.daocaorenshuwu.com/book/mingtianxia/"
-    failed = main(mode_name, url, max_workers=20, undone=False)
+    mode_name = "88dush"
+    url = "https://www.88dush.com/xiaoshuo/127/127308/"
+    failed, book_name = main(mode_name, url, max_workers=20, undone=True)
     max_failed = 0
     left = failed
     while failed != 0 and max_failed < 4:
         count = 0
         print("\n 尝试重新下载失败章节")
-        failed = main(mode_name, url, max_workers=20, undone=True)
+        failed, book_name = main(mode_name, url, max_workers=20, undone=True)
         if left == failed:
             max_failed += 1
         else:
             left = failed
+    files_merge.main(book_name)
     pass

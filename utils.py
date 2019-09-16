@@ -1,4 +1,5 @@
 import os
+import re
 
 import requests
 from bs4 import BeautifulSoup
@@ -11,6 +12,9 @@ def real_path(relative_path):
 def safe_mkdir(path):
     if not os.path.exists(path):
         os.makedirs(path)
+
+def safe_name(name:str):
+    return re.sub('\\?|\\*|\\:|\\"|\\<|\\>|\\\|\\/|\\|', '', name).strip()
 
 
 
@@ -26,5 +30,9 @@ def get_bs(url, encoding='utf8'):
 
 
 def save(dir, name: str, text):
+    name = safe_name(name)
     with open(dir + '/' + name + '.txt', 'w+', encoding='utf8') as file:
         file.write(text)
+
+if __name__ == '__main__':
+    print(safe_name('? * : " < > \ / |sdaf.dfsf"'))
