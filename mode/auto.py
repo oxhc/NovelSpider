@@ -89,9 +89,9 @@ def get_undone_urls():
     return links
 
 
-def main(config_name, catalog_url, max_workers=10, undone=False, download=(0, 0)):
+def download(config_name, catalog_url, max_workers=10, undone=False, download=(0, 0)):
     """
-    主函数
+    下载函数
     :param undone: 是否下载未下载成功的章节
     :param download: 下载数目
     :param config_name: 配置名称
@@ -170,16 +170,16 @@ def main(config_name, catalog_url, max_workers=10, undone=False, download=(0, 0)
     return len(faild_list), book_name
 
 
-if __name__ == '__main__':
-    mode_name = "88dush"
-    url = "https://www.88dush.com/xiaoshuo/127/127308/"
-    failed, book_name = main(mode_name, url, max_workers=20, undone=True)
+def main(mode_name='', url=''):
+    global count
+    count = 0
+    failed, book_name = download(mode_name, url, max_workers=20, undone=True)
     max_failed = 0
     left = failed
     while failed != 0 and max_failed < 4:
         count = 0
         print("\n 尝试重新下载失败章节")
-        failed, book_name = main(mode_name, url, max_workers=20, undone=True)
+        failed, book_name = download(mode_name, url, max_workers=20, undone=True)
         if left == failed:
             max_failed += 1
         else:
