@@ -4,3 +4,4 @@
 .idea
 *.py[cod]
 /release
+/venv
