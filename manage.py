@@ -1,6 +1,24 @@
+import json
+import os
+
+import auto
 from url_parse import HcUrl
-from mode import common_var
 import fire
+
+project_path = os.getcwd()
+
+
+def load_mapping(mapping_file_name='url_mapping.json'):
+    file_path = os.path.join(project_path, 'configs', mapping_file_name)
+    res = None
+    with open(file_path, 'r') as mapping_file:
+        res = mapping_file.read()
+    return json.loads(res)
+
+
+def download(url, maxworker=20):
+    mapping = load_mapping()
+    auto.main(mapping[HcUrl(url).parse().get('domain')], url, max_workers=maxworker)
 
 
 def main(url, maxworker=10):
@@ -14,6 +32,5 @@ def main(url, maxworker=10):
 
 
 if __name__ == '__main__':
-    # main("https://www.daocaorenshuwu.com/book/4564/")
-    fire.Fire(main)
-    # common_var.test()
+    fire.Fire()
+    # download("https://www.88dush.com/xiaoshuo/95/95784/")

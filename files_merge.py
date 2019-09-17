@@ -4,7 +4,7 @@ import os
 
 from utils import safe_mkdir
 
-project_path = os.path.dirname(__file__)
+project_path = os.getcwd()
 
 
 def filename_cmp(x: str, y: str):

@@ -15,7 +15,7 @@ import files_merge
 
 count = 0
 config = None
-project_path = os.path.dirname(os.path.dirname(__file__))
+project_path = os.getcwd()
 save_path = None
 
 
