@@ -3,3 +3,4 @@
 *.txt
 .idea
 *.py[cod]
+/release

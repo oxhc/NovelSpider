@@ -17,6 +17,7 @@ count = 0
 config = None
 project_path = os.getcwd()
 save_path = None
+termination = False
 
 
 def download_chapter(url):
@@ -67,7 +68,10 @@ def convert(url, title, body):
 
 
 def my_thread(url):
+    global termination
     global count
+    if termination:
+        return None
     try:
         chapter = download_chapter(url)
         save(

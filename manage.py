@@ -18,7 +18,11 @@ def load_mapping(mapping_file_name='url_mapping.json'):
 
 def download(url, maxworker=20):
     mapping = load_mapping()
-    auto.main(mapping[HcUrl(url).parse().get('domain')], url, max_workers=maxworker)
+    try:
+        auto.main(mapping[HcUrl(url).parse().get('domain')], url, max_workers=maxworker)
+    except KeyboardInterrupt:
+        auto.termination = True
+        print('正在终止..')
 
 
 def main(url, maxworker=10):
@@ -33,4 +37,3 @@ def main(url, maxworker=10):
 
 if __name__ == '__main__':
     fire.Fire()
-    # download("https://www.88dush.com/xiaoshuo/95/95784/")
