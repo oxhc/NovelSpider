@@ -4,4 +4,5 @@
 *.py[cod]
 /release
 /venv
-/mode/failed_urls.txt
+failed_urls.txt
+mode/failed_urls.txt
