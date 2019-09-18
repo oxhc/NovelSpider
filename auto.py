@@ -1,4 +1,4 @@
-# coding=gbk
+# coding=utf-8
 import json
 import os
 from concurrent.futures.thread import ThreadPoolExecutor
@@ -22,9 +22,9 @@ termination = False
 
 def download_chapter(url):
     """
-    ÏÂÔØÕÂ½Ú
-    :param url: ÕÂ½Úurl
-    :return: ÕÂ½Ú¶ÔÏó
+    ä¸‹è½½ç« èŠ‚
+    :param url: ç« èŠ‚url
+    :return: ç« èŠ‚å¯¹è±¡
     """
     bs = get_bs(url, config['encoding'])
     title = get_chapter_name(bs)
@@ -35,10 +35,10 @@ def download_chapter(url):
 
 def parse_catalog(bs: BeautifulSoup, prefix=''):
     """
-    ½âÎöÄ¿Â¼Ò³ĞÅÏ¢
-    :param bs: ÎÄµµÊ÷
-    :param prefix: Ä¿Â¼Ç°×º
-    :return: ÊéÃû, ÕÂ½ÚÁ´½Ó
+    è§£æç›®å½•é¡µä¿¡æ¯
+    :param bs: æ–‡æ¡£æ ‘
+    :param prefix: ç›®å½•å‰ç¼€
+    :return: ä¹¦å, ç« èŠ‚é“¾æ¥
     """
     atags = bs.select(config['chapter_urls'])
     links = [prefix + a['href'] for a in atags if 'class' not in a.attrs]
@@ -48,15 +48,15 @@ def parse_catalog(bs: BeautifulSoup, prefix=''):
 
 def get_chapter_name(bs: BeautifulSoup):
     """
-    »ñÈ¡ÕÂ½ÚÃû
-    :param bs: ÎÄµµÊ÷
-    :return: ÕÂ½ÚÃû
+    è·å–ç« èŠ‚å
+    :param bs: æ–‡æ¡£æ ‘
+    :return: ç« èŠ‚å
     """
     return bs.select_one(config['chapter_name']).string
 
 
 def get_body(bs: BeautifulSoup):
-    # todo: »¹Ã»Ğ´·ÖÒ³Ä£Ê½
+    # todo: è¿˜æ²¡å†™åˆ†é¡µæ¨¡å¼
     cont = bs.select_one(config['body'])
     body = config['inter_lines'].join([i for i in cont.stripped_strings])
     return body
@@ -99,30 +99,30 @@ def save_undone_urls():
 
 def download(config_name, catalog_url, max_workers=10, undone=False, download=(0, 0)):
     """
-    ÏÂÔØº¯Êı
-    :param undone: ÊÇ·ñÏÂÔØÎ´ÏÂÔØ³É¹¦µÄÕÂ½Ú
-    :param download: ÏÂÔØÊıÄ¿
-    :param config_name: ÅäÖÃÃû³Æ
-    :param catalog_url:  Ä¿Â¼ËùÔÚÂ·¾¶
-    :param max_workers: ×î´óÏß³ÌÊıÁ¿
+    ä¸‹è½½å‡½æ•°
+    :param undone: æ˜¯å¦ä¸‹è½½æœªä¸‹è½½æˆåŠŸçš„ç« èŠ‚
+    :param download: ä¸‹è½½æ•°ç›®
+    :param config_name: é…ç½®åç§°
+    :param catalog_url:  ç›®å½•æ‰€åœ¨è·¯å¾„
+    :param max_workers: æœ€å¤§çº¿ç¨‹æ•°é‡
     :return:  None
     """
 
-    #¼ÓÔØÈ«¾Ö±äÁ¿
+    #åŠ è½½å…¨å±€å˜é‡
     global save_path
     global config
 
-    # ½âÎöÅäÖÃÎÄ¼ş
+    # è§£æé…ç½®æ–‡ä»¶
     with open(os.path.join(project_path, 'configs', config_name + '_config.json'), 'r', encoding='utf8') as config_file:
         config = json.loads(config_file.read())
 
-    #½âÎöurl
+    #è§£æurl
     hc_url = HcUrl(catalog_url).parse()
 
-    # ¼ÓÔØÏß³Ì³Ø
+    # åŠ è½½çº¿ç¨‹æ± 
     executor = ThreadPoolExecutor(max_workers=max_workers)
 
-    # »ñÈ¡ÊéÃûÓëÕÂ½ÚÁ´½Ó
+    # è·å–ä¹¦åä¸ç« èŠ‚é“¾æ¥
     catalog_bs = get_bs(catalog_url, config['encoding'])
 
     prefix = hc_url.get('protocol') + '://' + hc_url.get('domain')
@@ -134,21 +134,21 @@ def download(config_name, catalog_url, max_workers=10, undone=False, download=(0
     book_name, links = parse_catalog(catalog_bs, prefix)
     print('Get catalog page success')
 
-    # ¼ÓÔØÎ´ÏÂÔØ³É¹¦Á´½Ó
+    # åŠ è½½æœªä¸‹è½½æˆåŠŸé“¾æ¥
     if undone is True:
         links = get_undone_urls()
 
     # print(links)
 
-    # ÏÂÔØÊıÁ¿ÉèÖÃ
+    # ä¸‹è½½æ•°é‡è®¾ç½®
     if download != (0, 0):
         links = links[download[0]:download[1]]
 
-    # ÅäÖÃÏÂÔØÂ·¾¶
+    # é…ç½®ä¸‹è½½è·¯å¾„
     save_path = os.path.join(project_path, 'novel_temp', book_name+'-'+hc_url.get('domain'))
     safe_mkdir(save_path)
 
-    #½«ÈÎÎñÌá½»ÖÁÏß³Ì³Ø
+    #å°†ä»»åŠ¡æäº¤è‡³çº¿ç¨‹æ± 
     all_task = [executor.submit(my_thread, url) for url in links]
     faild_list = []
 
@@ -162,14 +162,14 @@ def download(config_name, catalog_url, max_workers=10, undone=False, download=(0
 
     executor.shutdown(wait=True)
     pbar.close()
-    print("\n´Ë´ÎÏÂÔØÍê±Ï " + "ÒÑÏÂÔØ" + str(count) + "ÕÂ ¹²" + str(len(links)) + "ÕÂ " + " Ê§°Ü" + str(len(links) - count) + "ÕÂ")
+    print("\næ­¤æ¬¡ä¸‹è½½å®Œæ¯• " + "å·²ä¸‹è½½" + str(count) + "ç«  å…±" + str(len(links)) + "ç«  " + " å¤±è´¥" + str(len(links) - count) + "ç« ")
 
     if len(faild_list) != 0:
         with open("failed_urls.txt", 'w') as file:
             for i in faild_list:
                 file.write(i + '\n')
     else:
-        print('È«²¿ÏÂÔØÍê±Ï')
+        print('å…¨éƒ¨ä¸‹è½½å®Œæ¯•')
 
     book_name += '-' + hc_url.get('domain')
     return len(faild_list), book_name
@@ -183,7 +183,7 @@ def main(mode_name='', url='', max_workers=20):
     left = failed
     while failed != 0 and max_failed < 4:
         count = 0
-        print("\n ³¢ÊÔÖØĞÂÏÂÔØÊ§°ÜÕÂ½Ú")
+        print("\n å°è¯•é‡æ–°ä¸‹è½½å¤±è´¥ç« èŠ‚")
         failed, book_name = download(mode_name, url, max_workers=max_workers, undone=True)
         if left == failed:
             max_failed += 1

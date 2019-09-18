@@ -1,14 +1,14 @@
 {
-  "book_name": "body > div.jieshao > div.rt > h1",
+  "book_name": "div.jieshao > div.rt > h1",
   "书名位置": "book_name",
 
-  "chapter_urls": "body > div.mulu > ul > li > a",
+  "chapter_urls": "div.mulu > ul > li > a",
   "目录页的每章链接位置": "chapter_urls",
 
-  "chapter_name": "body > div.novel > h1",
+  "chapter_name": "div.novel > h1",
   "每章的标题": "chapter_name",
 
-  "body": "body > div.novel > div.yd_text2",
+  "body": "div.novel > div.yd_text2",
   "每章正文": "body",
 
   "inter_lines": "\n",
