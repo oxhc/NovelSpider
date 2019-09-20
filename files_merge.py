@@ -13,12 +13,13 @@ def filename_cmp(x: str, y: str):
     return x_num - y_num
 
 
-def main(book_name):
-    safe_mkdir(os.path.join(project_path, 'novel'))
-    file_path = os.path.join(project_path, 'novel_temp', book_name)
+def main(path, book_name):
+    save_path = os.path.join(path, '..', '..', 'novel')
+    safe_mkdir(save_path)
+    file_path = path
     fies = os.listdir(file_path)
     fies.sort(key=cmp_to_key(filename_cmp))
-    with open(os.path.join(project_path, 'novel', book_name+'.txt'), "a", encoding='utf8') as novel:
+    with open(os.path.join(save_path, book_name+'.txt'), "a", encoding='utf8') as novel:
         for f in fies:
             with open(os.path.join(file_path, f), 'r', encoding='utf8') as temp:
                 novel.write(temp.read() + '\n')

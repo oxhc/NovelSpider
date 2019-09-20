@@ -22,7 +22,7 @@ def download(url, maxworker=20):
     try:
         auto.main(mapping[HcUrl(url).parse().get('domain')], url, max_workers=maxworker)
     except KeyboardInterrupt:
-        auto.termination = True
+
         print('正在终止..')
 
 
