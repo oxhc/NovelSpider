@@ -92,6 +92,8 @@ class NoverDownloader:
 
         if len(self.faild_list) != 0:
             print("\nAttempt to download faild chapters")
+            for i in self.faild_list:
+                print(i)
             return self.start(undone=True)
         else:
             return True

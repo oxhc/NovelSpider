@@ -2,7 +2,7 @@ import os
 
 from bs4 import BeautifulSoup
 from url_parse import HcUrl
-from utils import get_bs
+from utils import get_bs, safe_name
 
 
 class Chapter:
@@ -34,5 +34,5 @@ class Chapter:
         if path is None:
             pass
         # print(os.path.join(path, self.id + '_' + self.name))
-        with open(os.path.join(path, self.id + '_' + self.name + '.txt'), 'w', encoding='utf-8') as file:
+        with open(os.path.join(path, safe_name(self.id + '_' + self.name + '.txt')), 'w', encoding='utf-8') as file:
             file.write('# ' + self.name + '\n\n' + self.body)
