@@ -21,19 +21,25 @@ class Main_Window(QWidget):
 
     def __init__(self):
         super().__init__()
+
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("resource/logo.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.setWindowIcon(icon)
+
         self.catalog = QLabel('目录页链接')
         self.mode = QLabel('模式')
         self.review = QLabel('输出')
         self.prog = QLabel('进度')
 
         self.catalog_edit = QLineEdit()
-        self.authorEdit = QLineEdit()
+        self.modeEdit = QLineEdit()
         self.reviewEdit = QTextEdit()
         self.reviewEdit.setReadOnly(True)
         self.reviewEdit.setObjectName("reviewEdit")
         self.pregress_bar = QProgressBar(self)
         self.download_button = QPushButton("下载")
         self.bu2 = QPushButton("暂停")
+        self.modeEdit.setText("自动选择")
         self.initUI()
         self.project_path = os.getcwd()
         self.old = sys.stdout
@@ -82,7 +88,7 @@ class Main_Window(QWidget):
         grid.addWidget(self.download_button, 1, 2)
 
         grid.addWidget(self.mode, 2, 0)
-        grid.addWidget(self.authorEdit, 2, 1)
+        grid.addWidget(self.modeEdit, 2, 1)
         grid.addWidget(self.bu2, 2, 2)
 
         grid.addWidget(self.prog, 3, 0)
