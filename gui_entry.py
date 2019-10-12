@@ -16,6 +16,7 @@ class EmittingStream(QtCore.QObject):
     def write(self, text):
         self.textWritten.emit(str(text))
 
+
 class Main_Window(QWidget):
     download_signal = QtCore.pyqtSignal()
 
@@ -70,9 +71,6 @@ class Main_Window(QWidget):
     def click(self, checked):
         self.download_signal.emit()
 
-    def print_it(self, num):
-        print(num)
-
     def set_bound(self):
         self.progress_obj = DownloadProgress()
         self.progress_obj.progress_signal.connect(self.pregress_bar.setValue)
@@ -101,7 +99,6 @@ class Main_Window(QWidget):
 
         self.setGeometry(300, 300, 500, 300)
         self.setWindowTitle('NoverDownloader')
-
 
 
 class HcUrl:

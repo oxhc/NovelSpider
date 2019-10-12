@@ -1,0 +1,24 @@
+{
+  "book_name": "body > div.container > div.bookinfo > div.btitle > h1",
+  "书名位置": "book_name",
+
+  "chapter_urls": "body > div.container > div.zlb > table > tbody > tr > td > ul > li > a",
+  "目录页的每章链接位置": "chapter_urls",
+
+  "chapter_name": "#BookCon > h1",
+  "每章的标题": "chapter_name",
+
+  "body": "#BookText",
+  "每章正文": "body",
+
+  "inter_lines": "\n",
+  "正文每行间的填充": "inter_lines",
+
+  "has_more_pages": "False",
+  "章节是否分页": "has_more_pages",
+
+  "chapter_url_prefix": "absolute",
+
+  "encoding": "utf8"
+
+}
