@@ -6,3 +6,4 @@
 /venv
 failed_urls.txt
 mode/failed_urls.txt
+.vscode/settings.json

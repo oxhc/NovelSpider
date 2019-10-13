@@ -21,16 +21,5 @@ def download(url, maxworker=20):
     mapping = load_mapping()
     auto.main(mapping[HcUrl(url).parse().get('domain')], url, max_workers=maxworker)
 
-
-# def main(url, maxworker=10):
-#     url = HcUrl(url)
-#     url.parse()
-#     website_name = url.get('domain').split('.')[1]
-#     package = __import__('mode.' + website_name)
-#     mode = getattr(package, website_name)
-#     method = getattr(mode, 'main')
-#     method(url.url, maxworker)
-
-
 if __name__ == '__main__':
     fire.Fire()
