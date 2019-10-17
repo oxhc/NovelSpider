@@ -7,7 +7,7 @@
 4. www.qisuu.la
 5. www.tianyashuku.com
 6. www.x83zw.com
-7. www.read8.net(推荐)
+7. www.read8.net (推荐)
 
 ### 使用方法
 1. 安装依赖
