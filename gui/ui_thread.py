@@ -37,7 +37,7 @@ class DownloadThread(QThread):
         mapping = load_mapping()
         work_path = os.getcwd()
         config = load_config(work_path, mapping[HcUrl(url).parse().get('domain')] + '_config.json')
-        from NoverDownloader import NoverDownloader
+        from components.NoverDownloader import NoverDownloader
         nd = NoverDownloader(
             url,
             config, work_path=work_path,

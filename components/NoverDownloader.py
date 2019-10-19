@@ -3,8 +3,8 @@ from concurrent.futures import as_completed
 from concurrent.futures.thread import ThreadPoolExecutor
 
 import files_merge
-from Catalog import Catalog
-from Chapter import Chapter
+from components.Catalog import Catalog
+from components.Chapter import Chapter
 from utils import safe_mkdir
 import url_parse
 
