@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="ui_design">
+    <file>xn.jpg</file>
+    <file>style.qss</file>
+  </qresource>
+</RCC>

@@ -27,6 +27,15 @@ class NoverDownloader:
         self.update = update
         self.try_times = 0
         self.faild_count = 0
+        self.catalog = Catalog(self.catalog_url, config=self.config)
+        self.book_info, self.catas = self.catalog.parse_catalog()
+        self.links = [i[0] for i in self.catas]
+        self.links_name = [i[1] for i in self.catas]
+        for key in self.book_info:
+            if self.config['info_separator'] in self.book_info[key]:
+                self.book_info[key] = self.book_info[key].split(self.config['info_separator'])[1]
+        self.book_name = self.book_info['book_name']
+        self.total_count = len(self.links)
 
         if work_path is not None:
             self.work_path = work_path
@@ -58,15 +67,14 @@ class NoverDownloader:
             return False
         # 获取目录页
         if not undone:
-            self.catalog = Catalog(self.catalog_url, config=self.config)
-            self.book_name, links = self.catalog.parse_catalog()
-            self.total_count = len(links)
+            # self.catalog = Catalog(self.catalog_url, config=self.config)
+            # self.book_name, links = self.catalog.parse_catalog()
+            # self.total_count = len(links)
             if self.set_total is not None:
                 self.set_total(self.total_count)
             self.work_path = os.path.join(self.work_path, 'novel_temp', self.book_name + '-' + self.domain)
             safe_mkdir(self.work_path)
-
-        if undone:
+        else:
             links = self.get_undone_urls()
 
         print('Get catalog success')
@@ -74,7 +82,7 @@ class NoverDownloader:
         executor = ThreadPoolExecutor(max_workers=self.max_worker)
 
         # 将任务提交至线程池
-        all_task = [executor.submit(self.download_thread, url) for url in links]
+        all_task = [executor.submit(self.download_thread, url) for url in self.links]
         self.faild_list = []
 
         for future in as_completed(all_task):

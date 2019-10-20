@@ -1,14 +1,8 @@
-from bs4 import BeautifulSoup
-
-
 from utils import get_bs
 from url_parse import HcUrl
 
-class Catalog:
-    url: str = None
-    bs: BeautifulSoup = None
-    config = None
 
+class Catalog:
     def __init__(self, url, config):
         self.url = url
         self.bs = get_bs(url, config['encoding'])
@@ -32,6 +26,14 @@ class Catalog:
         """
         self.set_prefix()
         atags = self.bs.select(self.config['chapter_urls'])
-        links = [self.prefix + a['href'] for a in atags if 'class' not in a.attrs]
+        links = [[self.prefix + a['href'], a.string] for a in atags]
         book_name = self.bs.select_one(self.config['book_name']).string
-        return book_name, links
+        author = self.bs.select_one(self.config['author']).string
+        status = self.bs.select_one(self.config['status']).string
+        update_date = self.bs.select_one(self.config['update_date']).string
+        return {
+                   'book_name':book_name,
+                   'author':author,
+                   'status':status,
+                   'update_date':update_date
+               },links

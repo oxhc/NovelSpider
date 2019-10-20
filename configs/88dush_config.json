@@ -19,6 +19,14 @@
 
   "chapter_url_prefix": "relative",
 
-  "encoding": "gbk"
+  "encoding": "gbk",
+
+  "author": "body > div.jieshao > div.rt > div.msg > em:nth-child(1)",
+
+  "status": "body > div.jieshao > div.rt > div.msg > em:nth-child(2)",
+
+  "update_date": "body > div.jieshao > div.rt > div.msg > em:nth-child(3)",
+
+  "info_separator": "："
 
 }

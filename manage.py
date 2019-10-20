@@ -48,8 +48,23 @@ def load_mapping(mapping_file_name='url_mapping.json'):
     return json.loads(res)
 
 
-def get_info(url):
-    pass
+def get_info(url, max_workers=20):
+    mapping = load_mapping()
+    work_path = os.getcwd()
+    mode_name = mapping[HcUrl(url).parse().get('domain')]
+    config = load_config(work_path, mode_name + '_config.json')
+    nd = NoverDownloader(
+        url,
+        config, work_path=work_path,
+        max_worker=max_workers
+    )
+    print(nd.catalog_url)
+    print(nd.book_name)
+    print(nd.book_info['author'])
+    print(nd.book_info['status'])
+    print(nd.book_info['update_date'])
+    print(mode_name)
+
 
 
 def download(url, maxworker=20):
