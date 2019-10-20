@@ -1,0 +1,16 @@
+{
+    "https://www.88dush.com": {
+        "target_url":"https://www.88dush.com/modules/article/search.php",
+        "method":"POST",
+        "encoding":"gbk",
+        "url_prefix": "absolute",
+        "key": {
+            "searchtype": "articlename",
+            "searchkey": "",
+            "action": "login"
+        },
+        "book_name_in_key":"searchkey",
+        "book_name":"body > div.booklist > ul > li > span.sm > a",
+        "author":"body > div.booklist > ul > li > span.zz"
+    }
+}
