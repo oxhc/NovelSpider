@@ -8,7 +8,7 @@ from components.NoverDownloader import NoverDownloader
 from url_parse import HcUrl
 import fire
 
-from utils import load_config
+from utils.utils_common import load_config
 
 project_path = os.getcwd()
 

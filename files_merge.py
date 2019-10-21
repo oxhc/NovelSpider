@@ -2,7 +2,7 @@
 from functools import cmp_to_key
 import os
 
-from utils import safe_mkdir
+from utils.utils_common import safe_mkdir
 
 project_path = os.getcwd()
 

@@ -5,7 +5,7 @@ from PyQt5.QtCore import QThread
 
 from gui.progress_record import DownloadProgress
 from url_parse import HcUrl
-from utils import load_config
+from utils.utils_common import load_config
 
 
 def total(progress: DownloadProgress, num):

@@ -43,3 +43,13 @@ def save(dir, name: str, text):
 
 if __name__ == '__main__':
     print(safe_name('? * : " < > \ / |sdaf.dfsf"'))
+
+
+class CommonHelper:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def readQss(style):
+        with open(style, 'r') as f:
+            return f.read()

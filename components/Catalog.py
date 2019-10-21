@@ -1,4 +1,4 @@
-from utils import get_bs
+from utils.utils_common import get_bs
 from url_parse import HcUrl
 
 

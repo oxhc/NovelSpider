@@ -5,7 +5,7 @@ from concurrent.futures.thread import ThreadPoolExecutor
 import files_merge
 from components.Catalog import Catalog
 from components.Chapter import Chapter
-from utils import safe_mkdir
+from utils.utils_common import safe_mkdir
 import url_parse
 
 

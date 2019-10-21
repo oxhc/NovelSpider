@@ -1,11 +1,9 @@
-import os
 import sys
 
-from detail import Ui_MainWindow
-from gui.thread_run import ThreadProxy
+from utils.thread_run import ThreadProxy
 from PyQt5 import QtCore, Qt
-from PyQt5.QtCore import QCoreApplication, QObject
-from PyQt5.QtGui import QCursor
+from PyQt5.QtCore import QObject
+from PyQt5.QtGui import QCursor, QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QAbstractItemView
 
 from search import Ui_SearchWindow
@@ -38,9 +36,13 @@ class SearchWindow(QMainWindow):
 
         self.ui.catalog_table.setHorizontalHeaderLabels(["小说名称", "作者", "添加"])
         self.ui.catalog_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.ui.mybooks.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.ui.mybooks.verticalHeader().setVisible(False)
         self.ui.catalog_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeToContents)
         self.ui.catalog_table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeToContents)
         self.ui.catalog_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.ui.catalog_table.setShowGrid(False)
+
 
         self.ui.search_button.clicked.connect(self.ui.get_info)
         self.ui.c.books_signal.connect(self.ui.set_table)
@@ -98,7 +100,7 @@ class UIProxy(Ui_SearchWindow):
             print(books[i]['book_name'])
             self.catalog_table.setItem(i, 0, QTableWidgetItem(books[i]['book_name']))
             self.catalog_table.setItem(i, 1, QTableWidgetItem(books[i]['author']))
-            self.catalog_table.setItem(i, 2, QTableWidgetItem("+"))
+            self.catalog_table.setItem(i, 2, QTableWidgetItem(QIcon("resource/add_to_books.png"), ""))
 
         self.c.status_signal.emit("搜索")
 

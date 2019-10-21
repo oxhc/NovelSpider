@@ -2,7 +2,7 @@ import os
 
 from bs4 import BeautifulSoup
 from url_parse import HcUrl
-from utils import get_bs, safe_name
+from utils.utils_common import get_bs, safe_name
 
 
 class Chapter:
