@@ -4,7 +4,7 @@ import os
 from PyQt5.QtCore import QThread
 
 from gui.progress_record import DownloadProgress
-from url_parse import HcUrl
+from utils.url_parse import HcUrl
 from utils.utils_common import load_config
 
 
@@ -43,7 +43,7 @@ class DownloadThread(QThread):
             config, work_path=work_path,
             set_total=lambda x: total(self.progress_obj, x),
             update=lambda x: update(self.progress_obj, x),
-            max_worker=20
+            max_worker=10
         )
         self.progress_obj.close()
         if nd.start():

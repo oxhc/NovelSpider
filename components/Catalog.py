@@ -1,5 +1,5 @@
 from utils.utils_common import get_bs
-from url_parse import HcUrl
+from utils.url_parse import HcUrl
 
 
 class Catalog:

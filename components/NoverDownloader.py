@@ -6,12 +6,11 @@ import files_merge
 from components.Catalog import Catalog
 from components.Chapter import Chapter
 from utils.utils_common import safe_mkdir
-import url_parse
-
+from utils import url_parse
 
 
 class NoverDownloader:
-    def __init__(self, url, config, max_worker=20, work_path=None, set_total=None, update=None):
+    def __init__(self, url, config, max_worker=10, work_path=None, set_total=None, update=None):
         self.downloaded_count = 0
         self.total_count = 0
         self.catalog = None
@@ -67,15 +66,12 @@ class NoverDownloader:
             return False
         # 获取目录页
         if not undone:
-            # self.catalog = Catalog(self.catalog_url, config=self.config)
-            # self.book_name, links = self.catalog.parse_catalog()
-            # self.total_count = len(links)
             if self.set_total is not None:
                 self.set_total(self.total_count)
             self.work_path = os.path.join(self.work_path, 'novel_temp', self.book_name + '-' + self.domain)
             safe_mkdir(self.work_path)
         else:
-            links = self.get_undone_urls()
+            self.links = self.get_undone_urls()
 
         print('Get catalog success')
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'search.ui'
+# Form implementation generated from reading ui file 'ui_search.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.0
 #
@@ -180,4 +180,4 @@ class Ui_SearchWindow(object):
         self.label.setText(_translate("SearchWindow", "小说名称"))
         self.search_button.setText(_translate("SearchWindow", "搜索"))
         self.label_3.setText(_translate("SearchWindow", "搜索结果:"))
-import ff_rc
+import resource_temp

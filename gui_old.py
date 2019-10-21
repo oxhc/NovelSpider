@@ -58,7 +58,7 @@ class Main_Window(QWidget):
         self.reviewEdit.setTextCursor(cursor)
         self.reviewEdit.ensureCursorVisible()
 
-    def download(self, maxworker=20):
+    def download(self, maxworker=10):
         self.thread = DownloadThread(self.catalog_edit.text(), self.progress_obj)
         self.thread.start()
 

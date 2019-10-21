@@ -8,9 +8,9 @@ from PyQt5.QtCore import QObject
 from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QAbstractItemView
 
-from detail import Ui_MainWindow
+from ui_detail import Ui_MainWindow
 from manage import load_mapping
-from url_parse import HcUrl
+from utils.url_parse import HcUrl
 from utils.utils_common import load_config
 
 
@@ -109,7 +109,7 @@ class UIProxy(Ui_MainWindow):
             config, work_path=work_path,
             set_total=lambda x: total(self.c.download_total_signal, x),
             update=lambda x: update(self.c.download_num_signal, x),
-            max_worker=20
+            max_worker=10
         )
         if nd.start():
             nd.make_book()
@@ -130,7 +130,7 @@ class UIProxy(Ui_MainWindow):
         nd = NoverDownloader(
             url,
             config, work_path=work_path,
-            max_worker=20
+            max_worker=10
         )
         self.c.book_name_signal.emit(nd.book_name)
         self.c.author_signal.emit(nd.book_info['author'])

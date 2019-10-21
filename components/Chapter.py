@@ -1,7 +1,7 @@
 import os
 
 from bs4 import BeautifulSoup
-from url_parse import HcUrl
+from utils.url_parse import HcUrl
 from utils.utils_common import get_bs, safe_name
 
 

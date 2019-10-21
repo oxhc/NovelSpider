@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 import urllib.parse
 
-from url_parse import HcUrl
+from utils.url_parse import HcUrl
 
 
 def load_configs(root_path, config_name):

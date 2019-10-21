@@ -5,7 +5,7 @@ import os
 from tqdm import tqdm
 
 from components.NoverDownloader import NoverDownloader
-from url_parse import HcUrl
+from utils.url_parse import HcUrl
 import fire
 
 from utils.utils_common import load_config
@@ -21,7 +21,7 @@ def update(progress, num):
     progress.update(num)
 
 
-def main(mode_name='', url='', max_workers=20):
+def main(mode_name='', url='', max_workers=10):
     work_path = os.getcwd()
     config = load_config(work_path, mode_name + '_config.json')
     progress_display = tqdm()    # progress_display 需要实现total成员与update方法
@@ -48,7 +48,7 @@ def load_mapping(mapping_file_name='url_mapping.json'):
     return json.loads(res)
 
 
-def get_info(url, max_workers=20):
+def get_info(url, max_workers=10):
     mapping = load_mapping()
     work_path = os.getcwd()
     mode_name = mapping[HcUrl(url).parse().get('domain')]
@@ -67,7 +67,7 @@ def get_info(url, max_workers=20):
 
 
 
-def download(url, maxworker=20):
+def download(url, maxworker=10):
     mapping = load_mapping()
     main(mapping[HcUrl(url).parse().get('domain')], url, max_workers=maxworker)
 

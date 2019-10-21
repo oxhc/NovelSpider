@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'detail.ui'
+# Form implementation generated from reading ui file 'ui_detail.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.0
 #
@@ -244,4 +244,4 @@ class Ui_MainWindow(object):
         self.label_6.setText(_translate("MainWindow", "状态:"))
         self.label_9.setText(_translate("MainWindow", "下载进度:"))
         self.progress_obj.setFormat(_translate("MainWindow", "  %p%"))
-import ff_rc
+import resource_temp
