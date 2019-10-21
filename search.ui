@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SearchWindow</class>
+ <widget class="QMainWindow" name="SearchWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>962</width>
+    <height>638</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>NoverDownloader</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">border-color: rgb(60, 12, 255);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_3">
+    <item row="0" column="1">
+     <widget class="QWidget" name="mainWidget" native="true">
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#mainWidget {
+                        background-color: #fafafa;
+                        border-width: 1px 1px 1px 1px;
+                        border-style: solid;
+                        border-color: rgb(160,160,160);
+                        border-radius:6px;
+                        }
+                        QPushButton {
+
+                        background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(61, 159, 232 ,
+                        255), stop:1 rgba(89, 183, 252, 255));
+                        padding:10px;
+                        color:white;
+                        border-radius:10px;
+
+                        }
+                        #close_button {
+                        padding:5px;
+                        border-radius:15px;
+                        }
+
+                        QLineEdit {
+                        border-width: 1px 1px 1px 1px;
+                        border-style: solid;
+                        border-color: rgb(160,160,160);
+                        border-radius:3px;
+						height:30px;
+                        }
+                    </string>
+      </property>
+      <widget class="QWidget" name="gridLayoutWidget_2">
+       <property name="geometry">
+        <rect>
+         <x>840</x>
+         <y>10</y>
+         <width>81</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="2">
+         <widget class="QPushButton" name="close_button">
+          <property name="maximumSize">
+           <size>
+            <width>15</width>
+            <height>15</height>
+           </size>
+          </property>
+          <property name="baseSize">
+           <size>
+            <width>17</width>
+            <height>17</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: #f46b72;
+                                        border-radius:7px;
+                                    </string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+          <property name="flat">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="title_button_2">
+          <property name="maximumSize">
+           <size>
+            <width>15</width>
+            <height>15</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: #f9c846;
+                                        border-radius:7px;
+                                    </string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="title_button_3">
+          <property name="minimumSize">
+           <size>
+            <width>16</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>15</width>
+            <height>15</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: #3fb89f;
+                                        border-radius:7px;
+                                    </string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>61</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>书籍搜索</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="verticalLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>50</y>
+         <width>151</width>
+         <height>541</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>我的书架</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="tableWidget">
+          <row>
+           <property name="text">
+            <string>1</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>书名</string>
+           </property>
+          </column>
+          <item row="0" column="0">
+           <property name="text">
+            <string>仙逆</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="verticalLayoutWidget_2">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>50</y>
+         <width>701</width>
+         <height>541</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="minimumSize">
+             <size>
+              <width>47</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>微软雅黑</family>
+              <pointsize>11</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>小说名称</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="search_button">
+            <property name="minimumSize">
+             <size>
+              <width>77</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>搜索</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="book_name">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>7</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>微软雅黑</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>搜索结果:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="3">
+           <widget class="QTableWidget" name="catalog_table">
+            <property name="showGrid">
+             <bool>true</bool>
+            </property>
+            <property name="rowCount">
+             <number>1</number>
+            </property>
+            <property name="columnCount">
+             <number>1</number>
+            </property>
+            <row/>
+            <column/>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="ff.qrc"/>
+ </resources>
+ <connections/>
+</ui>

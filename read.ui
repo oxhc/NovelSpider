@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>979</width>
+    <height>840</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="toolTip">
+   <string/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTextBrowser" name="textBrowser">
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;h1 align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:45px; background-color:#ffffff;&quot;&gt;&lt;span style=&quot; font-family:'Microsoft YaHei'; font-size:xx-large; font-weight:600; color:#000000; background-color:#ffffff;&quot;&gt;第一章 离乡&lt;/span&gt;&lt;/h1&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:5px; margin-bottom:5px; margin-left:36px; margin-right:36px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;&quot;&gt;&lt;a href=&quot;https://www.88dush.com/xiaoshuo/1/1552/index.html&quot;&gt;&lt;span style=&quot; font-family:'Microsoft YaHei'; font-size:14px; text-decoration: underline; color:#666666; background-color:#f8f8f8;&quot;&gt;← 上一章&lt;/span&gt;&lt;/a&gt;&lt;a href=&quot;https://www.88dush.com/xiaoshuo/1/1552/&quot;&gt;&lt;span style=&quot; font-family:'Microsoft YaHei'; font-size:14px; text-decoration: underline; color:#666666; background-color:#f8f8f8;&quot;&gt;返回目录&lt;/span&gt;&lt;/a&gt;&lt;a href=&quot;https://www.88dush.com/xiaoshuo/1/1552/18695341.html&quot;&gt;&lt;span style=&quot; font-family:'Microsoft YaHei'; font-size:14px; text-decoration: underline; color:#666666; background-color:#f8f8f8;&quot;&gt;下一章 →&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:35px; background-color:#ffffff;&quot;&gt;&lt;span style=&quot; font-family:'Microsoft YaHei'; font-size:18px; color:#333333; background-color:#ffffff;&quot;&gt;    铁柱坐在村内的小路边，望着蔚蓝的天空，神情发呆，铁柱不是他的本名，而是从小因为身体瘦弱，父亲怕养不活，于是按照习俗称呼的小名。&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei'; font-size:18px; color:#333333;&quot;&gt;&lt;br /&gt;&lt;br /&gt;    他的本名叫做王林，王姓在四周几个村落内算是大姓，祖上木匠出身，尤其是在县城，王氏家族也算颇有名气，拥有数个专门卖木制品的店铺。&lt;br /&gt;&lt;br /&gt;    铁柱的父亲是家族内庶出的次子，不能接管家族要务，而是在成婚后离开县城，在此地村庄定居。&lt;br /&gt;&lt;br /&gt;    由于有一手精湛的木匠活儿，铁柱家境也算小康，吃穿不愁，就算是在村子里，也多受人尊敬。&lt;br /&gt;&lt;br /&gt;    铁柱从小就极为聪明，喜欢读书，想法很多，几乎是村子内公认的神童，父亲每次听到别人夸奖，脸上的皱纹都会绽开，露出开怀的微笑。&lt;br /&gt;&lt;br /&gt;    母亲更是对他关心有佳，可以说从小到大，铁柱都是生活在父母的慈爱之中，他知道父母对他期望很高，别人家的孩子在他这个年纪都已经下地干农活了，可他却在家读书。&lt;br /&gt;&lt;br /&gt;    书读的多了，想法自然也就随之而来，对于山村外的世界，他充满向往。抬头望了望小路的尽头，铁柱叹息一声，合上手中书本，起身向家中走去。&lt;br /&gt;&lt;br /&gt;    父亲坐在院子里，手中拿着烟袋，深深的吸了一口后，对推门进来的铁柱说道：“铁柱，书读的怎么样了？”&lt;br /&gt;&lt;br /&gt;    铁柱应付了几句，父亲磕了磕烟袋，起身说道：“铁柱啊，你要好好读书，明年就是县里大考了，你以后有没有出息，可就全看这次了，可别跟我一样，这辈子就呆在村子里，唉。”&lt;br /&gt;&lt;br /&gt;    “行了，你天天叨叨，要我说，我们家铁柱一定能考上。”铁柱的母亲，端着饭菜放在院内桌子上，招呼他们父子二人过来吃饭。&lt;br /&gt;&lt;br /&gt;    铁柱哦了一声，坐下后胡乱的拔了几口，母亲慈爱的望着儿子，把不多的几块肉，给他夹过去。&lt;br /&gt;&lt;br /&gt;    “爹，四叔快来了吧？”铁柱抬头说道。&lt;br /&gt;&lt;br /&gt;    “算算时间，差不多就是这几天了，你四叔比爹有出息，唉，孩儿他娘，给老四准备的山菜都包好了吧？”父亲一提起老四，脸上露出唏嘘之色。&lt;br /&gt;&lt;br /&gt;    母亲点头，感慨道：“铁柱啊，你四叔是个好人，这几年幸亏他帮助，你爹做的木雕才能卖出价钱，你以后要是有出息了，别忘记报答你四叔。”&lt;br /&gt;&lt;br /&gt;    正说着，忽然门外传来马声，接着马车轱辘压地的哗哗声随之而来，一个爽朗的声音在外面响起。&lt;br /&gt;&lt;br /&gt;    “二哥，开门喽。”&lt;br /&gt;&lt;br /&gt;    铁柱惊喜，立刻跑过去把院子大门推开，只见一个精壮的中年汉子，目光炯炯的站在门外，他看到铁柱后哈哈一笑，摸了摸他的脑袋，笑道：“铁柱，这才半年没看到，个子又长高了。”&lt;br /&gt;&lt;br /&gt;    铁柱父母连忙站起，他父亲笑道：“老四，我约莫时间，你也快来了，快进来，铁柱，还不去给你四叔拿凳子去。”&lt;br /&gt;&lt;br /&gt;    铁柱高兴的应了一声，急忙跑回屋子，拿出一个板凳放在饭桌旁，用袖子认真的擦了擦，希冀的望着中年汉子。&lt;br /&gt;&lt;br /&gt;    中年汉子冲他眨了眨眼睛，打趣道：“铁柱，这次怎么这么勤快啊，我记得上次我来的时候，你可没这样啊。”&lt;br /&gt;&lt;br /&gt;    铁柱父亲瞪了铁柱一眼，笑骂道：“这小兔崽子，刚才就在叨叨你是不是快来了。”&lt;br /&gt;&lt;br /&gt;    中年汉子看到铁柱小脸微红，笑道：“铁柱，你四叔可没忘记答应你的东西。”说完，从怀来拿出两本线状书，放在桌子上。&lt;br /&gt;&lt;br /&gt;    铁柱兴奋的欢呼一声，拿起书翻看一下，喜不自禁。&lt;br /&gt;&lt;br /&gt;    铁柱他娘慈祥的望了眼自己儿子，对中年汉子说道：“老四，你哥平时总念叨你，这次多住几天吧。”&lt;br /&gt;&lt;br /&gt;    中年汉子摇头道：“二嫂，家族这段日子事情多，我明儿一早就要赶回去，等这段时间忙完了，我再来看你们。”说完，他歉意的看了看自己二哥。&lt;br /&gt;&lt;br /&gt;    铁柱父亲叹息，说道：“老四别听你嫂子的，明儿把货物装好，家族的事儿最重要，咱们以后再聚也一样。”&lt;br /&gt;&lt;br /&gt;    中年汉子望着铁柱父亲，说道：“二哥，铁柱今年十五岁了吧？”&lt;br /&gt;&lt;br /&gt;    铁柱父亲点头，感慨道：“过了年，这小兔崽子就十六了，唉，一晃十多年过去，真快。”说着，他眼露溺爱之色，望着自己的儿子。&lt;br /&gt;&lt;br /&gt;    中年汉子沉吟少许，面色一肃，说道：“二哥，二嫂，和你们说件事儿，恒岳派今年收取弟子，家族有三个推荐名额，分到我这里有一个。”&lt;br /&gt;&lt;br /&gt;    铁柱父亲一怔，失色道：“恒岳派？可是那个全都是仙人的恒岳派？”&lt;br /&gt;&lt;br /&gt;    中年汉子一笑，点头说道：“二哥，就是那个仙人门派，咱们家族在附近也算望族，有推荐资格，我家小子你也知道，读书不行，舞刀弄剑倒是擅长，我琢磨着仙人不大会收我家小子，这名额珍贵，我看铁柱从小就聪明，喜好读书，说不定能行。”&lt;br /&gt;&lt;br /&gt;    铁柱母亲喜极，急忙说道：“老四，这……这……”&lt;br /&gt;&lt;br /&gt;    中年汉子摸了摸铁柱脑袋，说道：“二哥，二嫂，我看这事就这么定了吧，让铁柱去试试，要是真被收取了，那就是他的福分。”&lt;br /&gt;&lt;br /&gt;    铁柱迷惑的望着父母与四叔，他有些听不懂他们说些什么，仙人？什么叫做仙人？铁柱犹豫了一下，轻声询问。&lt;br /&gt;&lt;br /&gt;    中年汉子面色严肃，望着铁柱，说道：“铁柱啊，仙人就是可以在天上飞来飞去，他们每一个人都神通广大，不是我们凡人可以琢磨的。”&lt;br /&gt;&lt;br /&gt;    铁柱懵懂间，对仙人有了一丝好奇。&lt;br /&gt;&lt;br /&gt;    铁柱父亲激动起身，拉着铁柱他娘对中年汉子就要鞠躬，中年汉子连忙把他们扶起，诚恳的说道：“二哥，你这是做什么。我娘死的早，要不是二娘小时候照顾我，我也不可能有今天，铁柱是我侄儿，我这么做是应该的。”&lt;br /&gt;&lt;br /&gt;    铁柱父亲感慨流泪，重重的拍了拍中年汉子，点了点头，随后疾言厉色的对铁柱说道：“王林你记住，以后无论如何，都不要忘记你四叔对咱们家的恩惠，否则我就没你这个儿子！”&lt;br /&gt;&lt;br /&gt;    铁柱内心一颤，他虽然对仙人还是懵懂，但却从父母的表情中看出他们对此事极为重视，于是跪在四叔面前，重重的磕了几个响头。&lt;br /&gt;&lt;br /&gt;    中年汉子拉起铁柱，赞赏的说道：“好孩子，你这几天收拾一下，我月底来接你！”&lt;br /&gt;&lt;br /&gt;    旁晚，铁柱早早的睡下，耳边还能听到院子里父亲与四叔的声音，父亲今天很高兴，很少喝酒的他，说什么也要和四叔喝上几杯。&lt;br /&gt;&lt;br /&gt;    “仙人？到底是什么？”铁柱内心很兴奋，他幼小的心灵隐约知道，这将是自己的一个机会，一个可以去外面世界的机会！&lt;br /&gt;&lt;br /&gt;    第二天一早，四叔离开了，铁柱的父母拉着他一直送到村口，在回来的路上，铁柱清晰的看到，父亲似乎一下子年轻了很多，看向他的眼神，也充满了期望。&lt;br /&gt;&lt;br /&gt;    这种期望的眼神，要比之前让他去县里大考时，浓重很多。&lt;br /&gt;&lt;br /&gt;    小山村内根本没有秘密可言，就是一只狗生了几个崽子也能在瞬间传遍全村，很快全村的人都从铁柱母亲嘴里知道了这个消息，纷纷来访，每个人的眼神看向铁柱时都不同，有羡慕，有嫉妒……&lt;br /&gt;&lt;br /&gt;    “王家生了个好娃，人家被恒岳派收为弟子了。”&lt;br /&gt;&lt;br /&gt;    “铁柱这孩子我从小看他长大，这孩子打小就聪明，这次又成为恒岳派弟子，以后定有大出息。”&lt;br /&gt;&lt;br /&gt;    “铁柱有本事，以后出息了可别忘记咱们村，多回来看看啊。”&lt;br /&gt;&lt;br /&gt;    诸如此类的话，纷纷涌入铁柱耳中，渐渐的说成了他已经成为恒岳派弟子一般，父母每次听到，都笑的合不上嘴，脸上的皱纹似乎都少了很多。&lt;br /&gt;&lt;br /&gt;    每当铁柱独自走在村内，所有看到他的村民，都热情的拉着他问来问去，更有甚者甚至当着自己孩子面，把铁柱当成榜样，训导一番。&lt;br /&gt;&lt;br /&gt;    半个月的时间很快过去，铁柱成为恒岳派弟子的消息迅速传开，周围十里八乡的村民，都陆续的前来道贺，他们的主要目的是看一看铁柱。&lt;br /&gt;&lt;br /&gt;    每个人来时，都会准备礼物，铁柱父母推脱不掉，也就收下了。不过在这些人离开时，他们都会为其准备一份重重的回礼，按照铁柱父亲的话说，咱家的娃儿以后那是高高在上的仙人，不能让他欠下这么多人情债，所有来访的村民，咱都给他回礼。&lt;br /&gt;&lt;br /&gt;    此时，王氏家族的族人，也渐渐知道老四把自己娃的名额让给铁柱的事情，纷纷陆续前来道喜。&lt;br /&gt;&lt;br /&gt;    对于自己家族的族人，铁柱父亲极为重视，这些人里有很多是之前瞧不起他的，更有多年前把他逼出家族的，现在这些人一个个前来他家，让他感觉一下子多年的憋屈一扫而空。&lt;br /&gt;&lt;br /&gt;    他和铁柱他娘商量一下，准备好好招待一番，于是花了大价钱，请村里的教书先生写下请帖，送往族内。&lt;br /&gt;&lt;br /&gt;    教书先生说什么也不收钱，只是要求铁柱必须要承认，他从小就在自己这里念书，对此铁柱没啥说的，这本就是事实嘛。&lt;br /&gt;&lt;br /&gt;    请帖送到后，王氏家族族内大部分亲戚都来庆祝，由于来人太多，铁柱他爹把招待地点选在了村子中心的广场，摆下数百桌宴席。&lt;br /&gt;&lt;br /&gt;    村子的居民自行帮着招待，相互交谈之时无不对铁柱赞叹有佳，夸奖不已。&lt;br /&gt;&lt;br /&gt;    至于铁柱他爹，则是带着老婆孩子亲自在村口迎接，为铁柱一一介绍亲戚身份。&lt;br /&gt;&lt;br /&gt;    “这是你三祖父，当初爹离开家族，你三祖父暗中帮衬了不少，铁柱，你以后要记的报答。”铁柱父亲搀扶着一个白发苍苍的老人，对王林说道。&lt;br /&gt;&lt;br /&gt;    铁柱连忙乖巧的应诺，老人望着铁柱，感慨道：“老二啊，时间真快，你家娃娃都这么大了，你这娃很好，比你有出息。”&lt;br /&gt;&lt;br /&gt;    铁柱父亲满面红光，笑道：“三祖父，铁柱这孩子从小就聪明，指定是比我强啊。您老慢点走，孩儿他娘，扶着三祖父过去。”&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>979</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>文件</string>
+    </property>
+   </widget>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

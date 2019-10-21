@@ -34,6 +34,7 @@ def search(book_name: str):
                }
     results = None
     for website_url in configs:
+        print("start")
         config = configs[website_url]
         if config['method'] == 'POST':
             config['key'][config['book_name_in_key']] = book_name

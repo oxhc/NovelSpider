@@ -24,9 +24,32 @@ class CommonHelper:
             return f.read()
 
 
-class MyWindow(QMainWindow):
+class BookWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.ui = UIProxy()
+        self.ui.setupUi(self)
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        # mainWindow.setWindowFlags(QtCore.Qt.WindowSystemMenuHint)
+        self.ui.close_button.clicked.connect(self.close)
+        self.ui.selected_button.clicked.connect(self.ui.get_info)
+        self.ui.c.book_name_signal.connect(self.ui.book_name.setText)
+        self.ui.c.mode_signal.connect(self.ui.mode_name.setText)
+        self.ui.c.author_signal.connect(self.ui.author.setText)
+        # ui.c.update_date_signal.connect(ui.up.setText)
+        self.ui.c.status_signal.connect(self.ui.status.setText)
+        self.ui.c.select_button_text_signal.connect(self.ui.selected_button.setText)
+        self.ui.catalog_table.setColumnCount(2)
+        self.ui.catalog_table.setRowCount(0)
+
+
+        self.ui.catalog_table.setHorizontalHeaderLabels(["章节名称", "下载"])
+        self.ui.catalog_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.ui.catalog_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeToContents)
+        self.ui.catalog_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.ui.c.links_num_signal.connect(self.ui.catalog_table.setRowCount)
+        self.ui.c.links_signal.connect(self.ui.set_table_data)
 
     def select(self):
         pass
@@ -103,9 +126,9 @@ class UIProxy(Ui_MainWindow):
 
 
     def get_info(self):
-        self.thread = ThreadProxy(self.fetch_info, None)
+        self.thread = ThreadProxy(self.fetch_info, None, None)
         self.thread.start()
-        print("hh")
+
 
 
 
@@ -113,30 +136,9 @@ class UIProxy(Ui_MainWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    mainWindow = MyWindow()
+    mainWindow = BookWindow()
 
-    ui = UIProxy()
-    ui.setupUi(mainWindow)
-    mainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-    mainWindow.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-    # mainWindow.setWindowFlags(QtCore.Qt.WindowSystemMenuHint)
-    ui.close_button.clicked.connect(QCoreApplication.instance().quit)
-    ui.selected_button.clicked.connect(ui.get_info)
-    ui.c.book_name_signal.connect(ui.book_name.setText)
-    ui.c.mode_signal.connect(ui.mode_name.setText)
-    ui.c.author_signal.connect(ui.author.setText)
-    # ui.c.update_date_signal.connect(ui.up.setText)
-    ui.c.status_signal.connect(ui.status.setText)
-    ui.c.select_button_text_signal.connect(ui.selected_button.setText)
-    ui.catalog_table.setColumnCount(2)
-    ui.catalog_table.setRowCount(0)
-
-    ui.catalog_table.setHorizontalHeaderLabels(["章节名称", "下载"])
-    ui.catalog_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-    ui.catalog_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeToContents)
-    ui.catalog_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
-    ui.c.links_num_signal.connect(ui.catalog_table.setRowCount)
-    ui.c.links_signal.connect(ui.set_table_data)
+    
     # styleFile = './style.qss'
     # qssStyle = CommonHelper.readQss(styleFile)
     # mainWindow.setStyleSheet(qssStyle)
