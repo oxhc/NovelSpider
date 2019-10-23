@@ -1,6 +1,6 @@
 import sys
 
-from utils.thread_run import ThreadProxy
+from utils.qthread_run import ThreadProxy
 from PyQt5 import QtCore, Qt
 from PyQt5.QtCore import QObject
 from PyQt5.QtGui import QCursor, QIcon
