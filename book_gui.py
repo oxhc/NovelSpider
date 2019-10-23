@@ -1,7 +1,7 @@
 import os
 import sys
 
-from components.NoverDownloader import NoverDownloader
+from components.Book import Book
 from utils.qthread_run import ThreadProxy
 from PyQt5 import QtCore, Qt
 from PyQt5.QtCore import QObject
@@ -102,23 +102,19 @@ class UIProxy(Ui_MainWindow):
         mapping = load_mapping()
         url = self.url_input.text()
         work_path = os.getcwd()
-        config = load_config(work_path, mapping[HcUrl(url).parse().get('domain')] + '_config.json')
-        from components.NoverDownloader import NoverDownloader
-        nd = NoverDownloader(
+        config = load_config(os.path.join(work_path,'configs'), mapping[HcUrl(url).parse().get('domain')] + '_config.json')
+        book = Book(
             url,
-            config, work_path=work_path,
+            config,
             set_total=lambda x: total(self.c.download_total_signal, x),
             update=lambda x: update(self.c.download_num_signal, x),
-            max_worker=10
         )
-        if nd.start():
-            nd.make_book()
+        book.load_catalog()
+        if book.download():
             print("全部下载完毕")
         else:
-            nd.make_book()
-            print("失败章节:")
-            for i in nd.faild_list:
-                print(i)
+            pass
+        book.save(os.path.join(os.getcwd(), 'novels'), book.information['book_name']+'.txt')
 
     def fetch_info(self):
         self.c.select_button_text_signal.emit("稍后")
@@ -126,24 +122,24 @@ class UIProxy(Ui_MainWindow):
         url = self.url_input.text()
         work_path = os.getcwd()
         mode_name = mapping[HcUrl(url).parse().get('domain')]
-        config = load_config(work_path, mode_name + '_config.json')
-        nd = NoverDownloader(
+        config = load_config(os.path.join(work_path,'configs'), mode_name + '_config.json')
+        book = Book(
             url,
-            config, work_path=work_path,
-            max_worker=10
+            config,
         )
-        self.c.book_name_signal.emit(nd.book_name)
-        self.c.author_signal.emit(nd.book_info['author'])
-        self.c.status_signal.emit(nd.book_info['status'])
-        self.c.update_date_signal.emit(nd.book_info['update_date'])
+        book.load_catalog()
+        self.c.book_name_signal.emit(book.information['book_name'])
+        self.c.author_signal.emit(book.information['author'])
+        self.c.status_signal.emit(book.information['status'])
+        self.c.update_date_signal.emit(book.information['update_date'])
         self.c.mode_signal.emit(mode_name)
-        self.c.links_num_signal.emit(len(nd.links))
-        self.c.links_signal.emit(nd.links_name)
+        self.c.links_num_signal.emit(len(book.chapters))
+        self.c.links_signal.emit(book.chapters)
         self.c.select_button_text_signal.emit("查询")
 
-    def set_table_data(self, cata_list):
-        for i in range(0, len(cata_list)):
-            self.catalog_table.setItem(i, 0, QTableWidgetItem(cata_list[i]))
+    def set_table_data(self, chapters):
+        for i in range(0, len(chapters)):
+            self.catalog_table.setItem(i, 0, QTableWidgetItem(chapters[i].title))
 
     def get_info(self):
         try:

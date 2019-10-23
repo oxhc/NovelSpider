@@ -12,7 +12,7 @@ class Chapter:
     name = ""
     url = ""
     title = ""
-    body = ""
+    body = "未下载"
     downloaded = False
     download_time = 1
     max_try = 3
@@ -46,9 +46,6 @@ class Chapter:
         except requests.exceptions.ReadTimeout as rt:
             print(f"第 {self.download_time} 次下载 {self.url}")
             self.download()
-
-        print(f"{self.title} 已下载")
-
 
     def __str__(self):
         return f"<chapter downloaded={self.downloaded} order={self.order} title={self.title}>"

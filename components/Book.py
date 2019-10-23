@@ -1,11 +1,10 @@
 import json
 import os
-
-import requests
-
+from concurrent.futures import as_completed
 from components.Chapter import Chapter
 from components.Catalog import Catalog
 from utils.thread_downloader import Downloader
+from utils.utils_common import safe_mkdir, load_config
 
 
 class Book:
@@ -17,11 +16,15 @@ class Book:
     information = {}
     max_workers = 15
     downloader = None
+    set_total = None
+    update = None
     url = ""
 
-    def __init__(self, url, config):
+    def __init__(self, url, config, set_total=None, update=None):
         self.catalog = Catalog(url, config)
         self.config = config
+        self.set_total = set_total
+        self.update = update
         pass
 
     def load_catalog(self):
@@ -43,29 +46,32 @@ class Book:
     def download(self, start=0, end=0):
         self.downloader = Downloader()
         end = len(self.chapters) if end == 0 else end
+        if self.set_total is not None:
+            self.set_total(len(self.chapters))
         for chapter in self.chapters[start:end]:
             self.downloader.push(chapter.download)
+        for future in as_completed(self.downloader.tasks):
+            if self.update is not None:
+                self.update(1)
+        self.downloader.wait()
+        return True
 
     def save(self, path, file_name):
-        pass
-
-    def save(self):
-        pass
-
-
-def load_configs(root_path, config_name):
-    with open(os.path.join(root_path, 'configs', config_name), 'r', encoding='utf8') as file:
-        return json.loads(file.read())
-
+        safe_mkdir(path)
+        with open(os.path.join(path, file_name), 'w', encoding='utf8') as novel:
+            for chapter in self.chapters:
+                ready_to_write = '# '+ chapter.title +'\n\n' + chapter.body
+                print(chapter.title)
+                novel.write(ready_to_write+ '\n')
 
 if __name__ == '__main__':
     # print(os.path.dirname(os.getcwd()))
-    config = load_configs(os.path.dirname(os.getcwd()), "88dush_config.json")
+    config = load_config(os.path.dirname(os.getcwd()), "88dush_config.json")
     # print(config)
     book = Book("https://www.88dush.com/xiaoshuo/131/131009/", config)
     book.load_catalog()
     print(book.information)
-    book.download()
-    book.downloader.wait()
+    book.download(0, 20)
     print(book.chapters)
+    book.save(os.getcwd(), "xxx.txt")
     #

@@ -31,9 +31,13 @@ class Catalog:
         author = self.bs.select_one(self.config['author']).string
         status = self.bs.select_one(self.config['status']).string
         update_date = self.bs.select_one(self.config['update_date']).string
-        return {
+        res = {
                    'book_name':book_name,
                    'author':author,
                    'status':status,
                    'update_date':update_date
-               },links
+               }
+        for key in res:
+            if self.config['info_separator'] in res[key]:
+                res[key] = res[key].split(self.config['info_separator'])[1]
+        return res,links

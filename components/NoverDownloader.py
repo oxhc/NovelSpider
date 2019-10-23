@@ -3,6 +3,7 @@ from concurrent.futures import as_completed
 from concurrent.futures.thread import ThreadPoolExecutor
 
 import files_merge
+from components import Book
 from components.Catalog import Catalog
 from components.Chapter import Chapter
 from utils.utils_common import safe_mkdir
@@ -11,6 +12,9 @@ from utils import url_parse
 
 class NoverDownloader:
     def __init__(self, url, config, max_worker=10, work_path=None, set_total=None, update=None):
+        self.book = Book(url, config, set_total=set_total, update=update)
+        self.book.load_catalog()
+        return
         self.downloaded_count = 0
         self.total_count = 0
         self.catalog = None
@@ -59,9 +63,11 @@ class NoverDownloader:
         return None
 
     def make_book(self):
+        return
         files_merge.main(self.work_path, self.book_name+'-'+self.domain)
 
     def start(self, undone=False):
+        return self.book.download()
         if self.try_times > 3:
             return False
         # 获取目录页

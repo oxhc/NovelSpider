@@ -4,7 +4,7 @@ import os
 
 from tqdm import tqdm
 
-from components.NoverDownloader import NoverDownloader
+from components.Book import Book
 from utils.url_parse import HcUrl
 import fire
 
@@ -24,25 +24,25 @@ def update(progress, num):
 def main(mode_name='', url='', max_workers=10):
     work_path = os.getcwd()
     config = load_config(work_path, mode_name + '_config.json')
-    progress_display = tqdm()    # progress_display 需要实现total成员与update方法
-    nd = NoverDownloader(
+    progress_display = tqdm()  # progress_display 需要实现total成员与update方法
+    book = Book(
         url,
-        config, work_path=work_path,
+        config,
         set_total=lambda x: set_total(progress_display, x),
         update=lambda x: update(progress_display, x),
-        max_worker=max_workers
     )
-    if nd.start():
+    book.load_catalog()
+    if book.download():
         progress_display.close()
-        nd.make_book()
+        # nd.make_book()
         print("全部下载完毕")
     else:
         progress_display.close()
+    book.save(os.getcwd(), "xxx.txt")
 
 
 def load_mapping(mapping_file_name='url_mapping.json'):
     file_path = os.path.join(project_path, 'configs', mapping_file_name)
-    res = None
     with open(file_path, 'r') as mapping_file:
         res = mapping_file.read()
     return json.loads(res)
@@ -50,20 +50,15 @@ def load_mapping(mapping_file_name='url_mapping.json'):
 
 def get_info(url, max_workers=10):
     mapping = load_mapping()
-    work_path = os.getcwd()
+    work_path = os.path.join(os.getcwd(), "configs")
     mode_name = mapping[HcUrl(url).parse().get('domain')]
     config = load_config(work_path, mode_name + '_config.json')
-    nd = NoverDownloader(
+    book = Book(
         url,
-        config, work_path=work_path,
-        max_worker=max_workers
+        config
     )
-    print(nd.catalog_url)
-    print(nd.book_name)
-    print(nd.book_info['author'])
-    print(nd.book_info['status'])
-    print(nd.book_info['update_date'])
-    print(mode_name)
+    book.load_catalog()
+    print(book.information)
 
 
 
@@ -73,4 +68,5 @@ def download(url, maxworker=10):
 
 
 if __name__ == '__main__':
-    fire.Fire()
+    # fire.Fire()
+    get_info("https://www.88dush.com/xiaoshuo/131/131009/")

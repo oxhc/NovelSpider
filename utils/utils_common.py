@@ -20,7 +20,7 @@ def safe_name(name: str):
 
 
 def load_config(root_path, config_name):
-    with open(os.path.join(root_path, 'configs', config_name), 'r', encoding='utf8') as file:
+    with open(os.path.join(root_path, config_name), 'r', encoding='utf8') as file:
         return json.loads(file.read())
 
 

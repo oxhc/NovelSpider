@@ -6,11 +6,7 @@ from bs4 import BeautifulSoup
 import urllib.parse
 
 from utils.url_parse import HcUrl
-
-
-def load_configs(root_path, config_name):
-    with open(os.path.join(root_path, 'configs', config_name), 'r', encoding='utf8') as file:
-        return json.loads(file.read())
+from utils.utils_common import load_config
 
 
 def make_prefix(url, config):
@@ -24,7 +20,7 @@ def make_prefix(url, config):
 
 
 def search(book_name: str):
-    configs = load_configs(os.getcwd(), 'search_rules.json')
+    configs = load_config(os.path.join(os.getcwd(),'configs'), 'search_rules.json')
     headers = {"User-Agent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.1.6) ",
                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                "Accept-Language": "en-us",
