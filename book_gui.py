@@ -8,7 +8,7 @@ from PyQt5.QtCore import QObject
 from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QAbstractItemView
 
-from ui_detail import Ui_MainWindow
+from ui.ui_detail import Ui_MainWindow
 from manage import load_mapping
 from utils.url_parse import HcUrl
 from utils.utils_common import load_config

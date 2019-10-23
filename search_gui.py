@@ -6,7 +6,7 @@ from PyQt5.QtCore import QObject
 from PyQt5.QtGui import QCursor, QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QAbstractItemView
 
-from ui_search import Ui_SearchWindow
+from ui.ui_search import Ui_SearchWindow
 from search_book import search
 from book_gui import BookWindow
 
