@@ -68,5 +68,4 @@ def download(url, maxworker=10):
 
 
 if __name__ == '__main__':
-    # fire.Fire()
-    get_info("https://www.88dush.com/xiaoshuo/131/131009/")
+    fire.Fire()
