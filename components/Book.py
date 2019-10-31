@@ -19,6 +19,7 @@ class Book:
     set_total = None
     update = None
     url = ""
+    terminate_now = False
 
     def __init__(self, url, config, set_total=None, update=None):
         self.catalog = Catalog(url, config)
@@ -42,6 +43,11 @@ class Book:
     def __getitem__(self, item) -> Chapter:
         self.chapters[item - 1].download()
         return self.chapters[item - 1]
+
+    def terminate(self):
+        for chapter in self.chapters:
+            chapter.terminate_now = True
+        self.downloader.terminate()
 
     def download(self, start=0, end=0):
         self.downloader = Downloader()

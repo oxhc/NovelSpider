@@ -32,7 +32,12 @@ def main(mode_name='', url='', max_workers=10):
         update=lambda x: update(progress_display, x),
     )
     book.load_catalog()
-    if book.download():
+    res = False
+    try:
+        res = book.download()
+    except KeyboardInterrupt:
+        book.terminate()
+    if res:
         progress_display.close()
         # nd.make_book()
         print("全部下载完毕")

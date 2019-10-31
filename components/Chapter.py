@@ -16,6 +16,7 @@ class Chapter:
     downloaded = False
     download_time = 1
     max_try = 3
+    terminate_now = False
 
     def __init__(self, url, config):
         self.url = url
@@ -33,6 +34,9 @@ class Chapter:
         return self.body
 
     def download(self):
+        if self.terminate_now:
+            print("终止下载")
+            return
         if self.download_time >= self.max_try:
             self.body = "本章下载失败"
             return

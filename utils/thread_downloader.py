@@ -16,6 +16,10 @@ class Downloader:
         task = self.executor.submit(func)
         self.tasks.append(task)
 
+    def terminate(self):
+        for task in self.tasks:
+            task.cancel()
+
     def wait(self):
         self.executor.shutdown(wait=True)
 
