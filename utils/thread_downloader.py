@@ -19,17 +19,3 @@ class Downloader:
     def wait(self):
         self.executor.shutdown(wait=True)
 
-
-def hello(x):
-    print(f"start {x}")
-    time.sleep(random.randint(0, 20))
-    print(f"finish {x}")
-
-
-
-if __name__ == '__main__':
-    downloader = Downloader()
-    for i in range(30):
-        downloader.push(lambda: hello(i))
-    print("hh")
-    downloader.executor.shutdown(wait=True)

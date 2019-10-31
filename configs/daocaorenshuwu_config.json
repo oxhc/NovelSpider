@@ -1,24 +1,10 @@
 {
   "book_name": "body > div > div > div.book-info > div > div > div.media > div.media-body > h1 > a",
-  "书名位置": "book_name",
-
   "chapter_urls": "#all-chapter > div > div.panel-body > div > div > a",
-  "目录页的每章链接位置": "chapter_urls",
-
   "chapter_name": "#content > h1",
-  "每章的标题": "chapter_name",
-
   "body": "#cont-text",
-  "每章正文": "body",
-
   "inter_lines": "\n",
-  "正文每行间的填充": "inter_lines",
-
   "has_more_pages": "True",
-  "章节是否分页": "has_more_pages",
-
   "chapter_url_prefix": "without_protocol",
-
   "encoding": "utf8"
-
 }

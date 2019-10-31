@@ -1,17 +1,14 @@
 {
-    "book_name": "#info > h1",
-  
-    "chapter_urls": "#list > dl > dd > a",
-  
-    "chapter_name": "#main > div.content_read > div > div.bookname > h1",
-  
-    "body": "#content",
-  
-    "inter_lines": "\n",
-  
-    "has_more_pages": "False",
-  
-    "chapter_url_prefix": "absolute",
-  
-    "encoding": "utf8"
-  }
+  "book_name": "#info > h1",
+  "chapter_urls": "#list > dl > dd > a",
+  "chapter_name": "#main > div.content_read > div > div.bookname > h1",
+  "body": "#content",
+  "inter_lines": "\n",
+  "has_more_pages": "False",
+  "chapter_url_prefix": "absolute",
+  "encoding": "utf8",
+  "author": "#info > p:nth-child(2) > a",
+  "status": "#info > p:nth-child(4)",
+  "update_date": "#info > p:nth-child(4)",
+  "info_separator": "："
+}

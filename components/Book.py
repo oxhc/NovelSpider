@@ -61,7 +61,6 @@ class Book:
         with open(os.path.join(path, file_name), 'w', encoding='utf8') as novel:
             for chapter in self.chapters:
                 ready_to_write = '# '+ chapter.title +'\n\n' + chapter.body
-                print(chapter.title)
                 novel.write(ready_to_write+ '\n')
 
 if __name__ == '__main__':

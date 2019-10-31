@@ -1,17 +1,20 @@
 import os
 import sys
 
+import requests
+
 from components.Book import Book
 from utils.qthread_run import ThreadProxy
 from PyQt5 import QtCore, Qt
 from PyQt5.QtCore import QObject
-from PyQt5.QtGui import QCursor
+from PyQt5.QtGui import QCursor, QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QAbstractItemView
 
 from ui.ui_detail import Ui_MainWindow
 from manage import load_mapping
 from utils.url_parse import HcUrl
 from utils.utils_common import load_config
+from urllib.parse import urlparse
 
 
 class BookWindow(QMainWindow):
@@ -46,6 +49,7 @@ class BookWindow(QMainWindow):
         self.ui.download_button.clicked.connect(self.ui.dowload_thread)
         self.ui.c.download_total_signal.connect(self.ui.progress_obj.setMaximum)
         self.ui.c.download_num_signal.connect(lambda x:self.ui.progress_obj.setValue(self.ui.progress_obj.value()+x))
+        self.ui.fengmian.setPixmap(QPixmap("resource/cover.jpg"))
 
     def mousePressEvent(self, event):
         if event.button() == Qt.Qt.LeftButton:
@@ -102,19 +106,23 @@ class UIProxy(Ui_MainWindow):
         mapping = load_mapping()
         url = self.url_input.text()
         work_path = os.getcwd()
-        config = load_config(os.path.join(work_path,'configs'), mapping[HcUrl(url).parse().get('domain')] + '_config.json')
+        mode_name =  mapping[HcUrl(url).parse().get('domain')]
+        config = load_config(os.path.join(work_path,'configs'), mode_name + '_config.json')
         book = Book(
             url,
             config,
             set_total=lambda x: total(self.c.download_total_signal, x),
             update=lambda x: update(self.c.download_num_signal, x),
         )
-        book.load_catalog()
+        try:
+            book.load_catalog()
+        except requests.exceptions.ReadTimeout as rt:
+            print("获取超时")
         if book.download():
             print("全部下载完毕")
         else:
             pass
-        book.save(os.path.join(os.getcwd(), 'novels'), book.information['book_name']+'.txt')
+        book.save(os.path.join(os.getcwd(), 'novels'), book.information['book_name']+'-'+mode_name+'.txt')
 
     def fetch_info(self):
         self.c.select_button_text_signal.emit("稍后")
@@ -127,7 +135,10 @@ class UIProxy(Ui_MainWindow):
             url,
             config,
         )
-        book.load_catalog()
+        try:
+            book.load_catalog()
+        except requests.exceptions.ReadTimeout as rt:
+            print("获取超时")
         self.c.book_name_signal.emit(book.information['book_name'])
         self.c.author_signal.emit(book.information['author'])
         self.c.status_signal.emit(book.information['status'])
@@ -136,6 +147,7 @@ class UIProxy(Ui_MainWindow):
         self.c.links_num_signal.emit(len(book.chapters))
         self.c.links_signal.emit(book.chapters)
         self.c.select_button_text_signal.emit("查询")
+
 
     def set_table_data(self, chapters):
         for i in range(0, len(chapters)):
@@ -148,8 +160,18 @@ class UIProxy(Ui_MainWindow):
         except Exception:
             print("error")
 
+    def setpic(self,pix):
+        self.fengmian.setPixmap(pix)
+
+def download_pic(url):
+    response = requests.get("https://www.read8.net/files/article/image/1/1117/1117s.jpg")
+    q= QPixmap("cover.jpg")
+    url.emit(q)
+
 
 if __name__ == '__main__':
+    # download_pic("https://www.read8.net/files/article/image/1/1117/1117s.jpg")
+
     app = QApplication(sys.argv)
     mainWindow = BookWindow()
     mainWindow.show()

@@ -1,5 +1,7 @@
 {
-    "https://www.88dush.com": {
+    "88dush.com": {
+        "status":"normal",
+        "prefix":"https://www.88dush.com",
         "target_url":"https://www.88dush.com/modules/article/search.php",
         "method":"POST",
         "encoding":"gbk",
@@ -9,8 +11,24 @@
             "searchkey": "",
             "action": "login"
         },
+        "request_encoding":"gbk",
         "book_name_in_key":"searchkey",
         "book_name":"body > div.booklist > ul > li > span.sm > a",
         "author":"body > div.booklist > ul > li > span.zz"
+    },
+    "read8.net": {
+        "status":"normal",
+        "prefix":"https://www.read8.net",
+        "target_url":"https://www.read8.net/index.php?s=/web/index/search",
+        "method":"POST",
+        "encoding":"utf8",
+        "url_prefix": "relative",
+        "key": {
+            "name":""
+        },
+        "request_encoding":"utf8",
+        "book_name_in_key":"name",
+        "book_name":"#main > div.novelslist2 > ul > li > span.s2 > a",
+        "author":"#main > div.novelslist2 > ul > li > span.s4 > a"
     }
 }

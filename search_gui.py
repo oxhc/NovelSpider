@@ -31,31 +31,42 @@ class SearchWindow(QMainWindow):
         # mainWindow.setWindowFlags(QtCore.Qt.WindowSystemMenuHint)
         self.ui.close_button.clicked.connect(self.close)
 
-        self.ui.catalog_table.setColumnCount(3)
+        self.ui.catalog_table.setColumnCount(4)
         self.ui.catalog_table.setRowCount(0)
 
-        self.ui.catalog_table.setHorizontalHeaderLabels(["小说名称", "作者", "添加"])
+        self.ui.catalog_table.setHorizontalHeaderLabels(["小说名称", "作者", "来源", "添加"])
         self.ui.catalog_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.ui.mybooks.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.ui.mybooks.verticalHeader().setVisible(False)
         self.ui.catalog_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeToContents)
         self.ui.catalog_table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeToContents)
+        self.ui.catalog_table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeToContents)
         self.ui.catalog_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.ui.catalog_table.setShowGrid(False)
+
+        self.ui.website_select.addItem('全部')
+        self.ui.website_select.addItem('88dush.com')
+        self.ui.website_select.addItem('read8.net')
+
+        self.ui.website_select.activated.connect(lambda :print("hello world"))
 
 
         self.ui.search_button.clicked.connect(self.ui.get_info)
         self.ui.c.books_signal.connect(self.ui.set_table)
         self.ui.c.status_signal.connect(self.ui.search_button.setText)
+        self.ui.min_button.clicked.connect(lambda :self.setWindowState(QtCore.Qt.WindowMinimized))
+        self.ui.max_button.clicked.connect(lambda :self.setWindowState(QtCore.Qt.WindowMaximized if not self.isMaximized() else QtCore.Qt.WindowNoState))
+        self.ui.max_button.clicked.connect(lambda :print(self.isMaximized()))
 
+        self.m_flag = False
 
     def mousePressEvent(self, event):
         if event.button() == Qt.Qt.LeftButton:
             self.m_flag = True
             self.m_Position = event.globalPos() - self.pos()  # 获取鼠标相对窗口的位置
             event.accept()
-            self.setCursor(QCursor(Qt.Qt.SizeAllCursor))  # 更改鼠标图标
-
+            # self.setCursor(QCursor(Qt.Qt.SizeAllCursor))  # 更改鼠标图标
+    #
     def mouseMoveEvent(self, QMouseEvent):
         if Qt.Qt.LeftButton and self.m_flag:
             self.move(QMouseEvent.globalPos() - self.m_Position)  # 更改窗口位置
@@ -82,7 +93,8 @@ class UIProxy(Ui_SearchWindow):
 
     def get_info(self):
         self.c.status_signal.emit("正在搜索")
-        self.thread = ThreadProxy(search, self.book_name.text(), self.c.books_signal)
+        # print(self.website_select.currentText())
+        self.thread = ThreadProxy(lambda x:search(x,self.website_select.currentText()), self.book_name.text(), self.c.books_signal)
         self.thread.start()
 
     def item_clicked(self, url):
@@ -90,17 +102,16 @@ class UIProxy(Ui_SearchWindow):
         self.c.open_book_signal.emit(True)
         self.c.url_signal.emit(url)
 
-
     def set_table(self, books):
         print(books)
         self.books = books
         self.catalog_table.setRowCount(len(books))
-        self.catalog_table.itemClicked.connect(lambda x:self.item_clicked(self.books[x.row()]['href']))
+        self.catalog_table.itemClicked.connect(lambda x: self.item_clicked(self.books[x.row()]['href']))
         for i in range(0, len(books)):
-            print(books[i]['book_name'])
             self.catalog_table.setItem(i, 0, QTableWidgetItem(books[i]['book_name']))
             self.catalog_table.setItem(i, 1, QTableWidgetItem(books[i]['author']))
-            self.catalog_table.setItem(i, 2, QTableWidgetItem(QIcon("resource/add_to_books.png"), ""))
+            self.catalog_table.setItem(i, 2, QTableWidgetItem(books[i]['from']))
+            self.catalog_table.setItem(i, 3, QTableWidgetItem(QIcon("resource/add_to_books.png"), ""))
 
         self.c.status_signal.emit("搜索")
 

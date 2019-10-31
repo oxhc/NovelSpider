@@ -23,7 +23,7 @@ def update(progress, num):
 
 def main(mode_name='', url='', max_workers=10):
     work_path = os.getcwd()
-    config = load_config(work_path, mode_name + '_config.json')
+    config = load_config(os.path.join(work_path, 'configs'), mode_name + '_config.json')
     progress_display = tqdm()  # progress_display 需要实现total成员与update方法
     book = Book(
         url,

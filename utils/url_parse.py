@@ -1,7 +1,13 @@
 import re
+from urllib.parse import urlparse
 
 
 class HcUrl:
+    url = ""
+    protocol = ""
+    domain = ""
+    last_part = ""
+
     def __init__(self, url: str):
         self.url = url
         self.__parts = {}
@@ -27,9 +33,5 @@ class HcUrl:
 
 
 if __name__ == '__main__':
-    url = HcUrl("https://www.biquge.com.cn/book/31833.html").parse()
-    # print(url.get_first())
-
-    print(url.get('protocol'))
-    print(url.get('domain'))
-    print(url.get_end())
+    url = urlparse("https://www.biquge.com.cn/book/31833.html")
+    print(url)
