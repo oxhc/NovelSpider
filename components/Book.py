@@ -73,7 +73,7 @@ if __name__ == '__main__':
     # print(os.path.dirname(os.getcwd()))
     config = load_config(os.path.dirname(os.getcwd()), "88dush_config.json")
     # print(config)
-    book = Book("https://www.88dush.com/xiaoshuo/131/131009/", config)
+    book = Book("https://www.88dushu.com/xiaoshuo/1/1552/", config)
     book.load_catalog()
     print(book.information)
     book.download(0, 20)

@@ -1,8 +1,8 @@
 {
-    "88dush.com": {
+    "88dushu.com": {
         "status":"normal",
-        "prefix":"https://www.88dush.com",
-        "target_url":"https://www.88dush.com/modules/article/search.php",
+        "prefix":"https://www.88dushu.com",
+        "target_url":"https://www.88dushu.com/modules/article/search.php",
         "method":"POST",
         "encoding":"gbk",
         "url_prefix": "absolute",
