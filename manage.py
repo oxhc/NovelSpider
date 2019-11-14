@@ -43,7 +43,7 @@ def main(mode_name='', url='', max_workers=10):
         print("全部下载完毕")
     else:
         progress_display.close()
-    book.save(os.getcwd(), "xxx.txt")
+    book.save(os.path.join(os.getcwd(), 'novels'), book.information['book_name']+'-'+mode_name+'.txt')
 
 
 def load_mapping(mapping_file_name='url_mapping.json'):
