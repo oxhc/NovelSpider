@@ -1,4 +1,5 @@
 {
+  "mode_name": "read8",
   "book_name": "#info > h1",
   "chapter_urls": "#list > dl > dd > a",
   "chapter_name": "#main > div.content_read > div > div.bookname > h1",

@@ -11,9 +11,8 @@ from PyQt5.QtGui import QCursor, QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QAbstractItemView
 
 from ui.ui_detail import Ui_MainWindow
-from manage import load_mapping
+from utils.config_utils import load_mapping, load_config
 from utils.url_parse import HcUrl
-from utils.utils_common import load_config
 from urllib.parse import urlparse
 
 
@@ -103,11 +102,9 @@ class UIProxy(Ui_MainWindow):
 
     def download(self):
         print('start downloading')
-        mapping = load_mapping()
         url = self.url_input.text()
         work_path = os.getcwd()
-        mode_name =  mapping[HcUrl(url).parse().get('domain')]
-        config = load_config(os.path.join(work_path,'configs'), mode_name + '_config.json')
+        config = load_config(url, os.path.join(work_path, 'configs', 'url_mapping.json'))
         book = Book(
             url,
             config,
@@ -122,15 +119,13 @@ class UIProxy(Ui_MainWindow):
             print("全部下载完毕")
         else:
             pass
-        book.save(os.path.join(os.getcwd(), 'novels'), book.information['book_name']+'-'+mode_name+'.txt')
+        book.save(os.path.join(os.getcwd(), 'novels'), book.information['book_name']+'-'+config['mode_name']+'.txt')
 
     def fetch_info(self):
         self.c.select_button_text_signal.emit("稍后")
-        mapping = load_mapping()
         url = self.url_input.text()
         work_path = os.getcwd()
-        mode_name = mapping[HcUrl(url).parse().get('domain')]
-        config = load_config(os.path.join(work_path,'configs'), mode_name + '_config.json')
+        config = load_config(url, os.path.join(work_path, 'configs', 'url_mapping.json'))
         book = Book(
             url,
             config,
@@ -143,7 +138,7 @@ class UIProxy(Ui_MainWindow):
         self.c.author_signal.emit(book.information['author'])
         self.c.status_signal.emit(book.information['status'])
         self.c.update_date_signal.emit(book.information['update_date'])
-        self.c.mode_signal.emit(mode_name)
+        self.c.mode_signal.emit(config['mode_name'])
         self.c.links_num_signal.emit(len(book.chapters))
         self.c.links_signal.emit(book.chapters)
         self.c.select_button_text_signal.emit("查询")

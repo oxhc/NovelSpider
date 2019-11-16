@@ -4,7 +4,8 @@ from concurrent.futures import as_completed
 from components.Chapter import Chapter
 from components.Catalog import Catalog
 from utils.thread_downloader import Downloader
-from utils.utils_common import safe_mkdir, load_config
+from utils.utils_common import safe_mkdir
+from utils.config_utils import load_config
 
 
 class Book:
@@ -74,7 +75,7 @@ class Book:
 
 if __name__ == '__main__':
     # print(os.path.dirname(os.getcwd()))
-    config = load_config(os.path.dirname(os.getcwd()), "88dush_config.json")
+    config = load_config(os.path.dirname(os.getcwd()), "88dush.json")
     # print(config)
     book = Book("https://www.88dushu.com/xiaoshuo/1/1552/", config)
     book.load_catalog()

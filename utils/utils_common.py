@@ -1,4 +1,3 @@
-import json
 import os
 import re
 
@@ -17,11 +16,6 @@ def safe_mkdir(path):
 
 def safe_name(name: str):
     return re.sub('\\?|\\*|\\:|\\"|\\<|\\>|\\\|\\/|\\|', '', name).strip()
-
-
-def load_config(root_path, config_name):
-    with open(os.path.join(root_path, config_name), 'r', encoding='utf8') as file:
-        return json.loads(file.read())
 
 
 def get_bs(url, encoding='utf8'):
