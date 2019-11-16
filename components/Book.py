@@ -11,7 +11,6 @@ class Book:
     book_name = ""
     catalog = None
     chapters = []
-    config = None
     failed_chapters = []
     information = {}
     max_workers = 15
@@ -26,6 +25,10 @@ class Book:
         self.config = config
         self.set_total = set_total
         self.update = update
+        pass
+
+    def get_config(self):
+
         pass
 
     def load_catalog(self):

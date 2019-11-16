@@ -56,9 +56,3 @@ class Chapter:
 
     def __repr__(self):
         return self.__str__()
-
-    def save(self, path):
-        if path is None:
-            pass
-        with open(os.path.join(path, safe_name(self.name + '_' + self.name + '.txt')), 'w', encoding='utf-8') as file:
-            file.write('# ' + self.name + '\n\n' + self.body)
