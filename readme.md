@@ -1,4 +1,5 @@
 ### 支持网站
+<!--
 1. 笔趣阁:
     1. www.xbiquge6.com
     2. www.biquge.com.cn
@@ -8,6 +9,9 @@
 5. www.tianyashuku.com
 6. www.x83zw.com
 7. www.read8.net (推荐)
+-->
+1. www.88dushu.com (推荐)
+2. www.read8.net (推荐)
 
 ### 使用方法
 1. 安装依赖
