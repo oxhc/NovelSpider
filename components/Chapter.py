@@ -1,9 +1,6 @@
-import os
-
 import requests
-from bs4 import BeautifulSoup
-from NovelSpider.utils.url_parse import HcUrl
-from NovelSpider.utils.utils_common import get_bs, safe_name
+from utils.url_parse import HcUrl
+from utils.utils_common import get_bs
 
 
 class Chapter:
@@ -20,7 +17,7 @@ class Chapter:
 
     def __init__(self, url, config):
         self.url = url
-        self.bs: BeautifulSoup = None
+        self.bs = None
         self.config = config
 
     def get_chapter_title(self):
