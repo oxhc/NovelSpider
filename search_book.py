@@ -5,8 +5,8 @@ import requests
 from bs4 import BeautifulSoup
 import urllib.parse
 
-from utils.url_parse import HcUrl
-from utils.config_utils import load_config
+from NovelSpider.utils.url_parse import HcUrl
+from NovelSpider.utils.config_utils import load_config
 
 
 def make_prefix(url, config):
@@ -19,8 +19,11 @@ def make_prefix(url, config):
     return prefix
 
 
-def search(book_name: str, website="全部"):
-    configs = load_config(None, None, not_mapping=os.path.join(os.getcwd(), 'configs', 'search_rules.json'))
+def search(book_name: str, website="全部", config=None):
+    if config is not None:
+        configs = config
+    else:
+        configs = load_config(None, None, not_mapping=os.path.join(os.getcwd(), 'configs', 'search_rules.json'))
     headers = {"User-Agent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.1.6) ",
                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                "Accept-Language": "en-us",

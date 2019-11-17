@@ -1,5 +1,5 @@
-from utils.utils_common import get_bs
-from utils.url_parse import HcUrl
+from NovelSpider.utils.utils_common import get_bs
+from NovelSpider.utils.url_parse import HcUrl
 
 
 class Catalog:

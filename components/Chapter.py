@@ -2,8 +2,8 @@ import os
 
 import requests
 from bs4 import BeautifulSoup
-from utils.url_parse import HcUrl
-from utils.utils_common import get_bs, safe_name
+from NovelSpider.utils.url_parse import HcUrl
+from NovelSpider.utils.utils_common import get_bs, safe_name
 
 
 class Chapter:
