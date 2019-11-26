@@ -5,8 +5,8 @@ import requests
 from bs4 import BeautifulSoup
 import urllib.parse
 
-from NovelSpider.utils.url_parse import HcUrl
-from NovelSpider.utils.config_utils import load_config
+from utils.url_parse import HcUrl
+from utils.config_utils import load_config
 
 
 def make_prefix(url, config):

@@ -12,7 +12,7 @@ class Chapter:
     body = "未下载"
     downloaded = False
     download_time = 1
-    max_try = 3
+    max_try = 5
     terminate_now = False
 
     def __init__(self, url, config):
